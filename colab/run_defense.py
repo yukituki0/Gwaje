@@ -1,7 +1,8 @@
 """
-risk_score 임계값 이상 노드에 대해 방어전략 생성 + 평가 (7.5절 확장 가능 구조)
-실행: python -m core.defense.run_defense
+[Colab 전용] risk_score 임계값 이상 노드에 대해 방어전략 사전생성 (7.5절)
+실행: python -m colab.run_defense
 결과: data/defense_strategies.jsonl
+앱은 이 결과를 app/defense_lookup.py로 조회만 함 (LLM 즉석 호출 없음).
 """
 import json
 import os
@@ -9,7 +10,7 @@ from core.graph.network_builder import build_base_network
 from core.detection.risk_score import compute_risk_scores
 from core.detection.dijkstra import shortest_attack_path
 from core.defense.prompt_builder import build_prompt, build_node_info
-from core.defense.llm_client import generate_defense
+from colab.llm_client import generate_defense
 from core.defense.evaluator import match_rate
 
 RISK_THRESHOLD = 0.6  # 계획서 5.3.2 / 7.5절

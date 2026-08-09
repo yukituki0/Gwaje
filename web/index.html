@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>동적 공격 그래프 시각화</title>
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<style>
+  body { margin: 0; font-family: sans-serif; background: #1a1a2e; color: #eee; }
+  #network { width: 100%; height: 70vh; border-bottom: 1px solid #444; }
+  #panel { padding: 16px; min-height: 20vh; }
+  #panel h3 { margin-top: 0; }
+  .legend { padding: 8px 16px; font-size: 13px; }
+  .legend span { margin-right: 16px; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
+  ul { padding-left: 18px; }
+</style>
+</head>
+<body>
+
+<div class="legend">
+  <span><span class="dot" style="background:#2ecc71"></span>낮음 (&lt;0.3)</span>
+  <span><span class="dot" style="background:#f1c40f"></span>중간 (0.3~0.7)</span>
+  <span><span class="dot" style="background:#e74c3c"></span>높음 (&gt;0.7)</span>
+  <span>굵은 테두리 = 공격 경로 상 노드</span>
+</div>
+
+<div id="network"></div>
+<div id="panel"><p>노드를 클릭하면 방어전략이 여기 표시됩니다.</p></div>
+
+<script>
+async function main() {
+  const graphRes = await fetch('/api/graph');
+  const graph = await graphRes.json();
+
+  const analysisRes = await fetch('/api/analysis');
+  const analysis = await analysisRes.json();
+
+  const pathSet = new Set(analysis.attack_path);
+
+  function riskColor(score) {
+    if (score >= 0.7) return '#e74c3c';
+    if (score >= 0.3) return '#f1c40f';
+    return '#2ecc71';
+  }
+
+  const nodes = new vis.DataSet(graph.nodes.map(n => {
+    const risk = analysis.risk_scores[n.id] ?? 0;
+    const onPath = pathSet.has(n.id);
+    return {
+      id: n.id,
+      label: n.id,
+      color: { background: riskColor(risk), border: onPath ? '#ffffff' : '#555' },
+      borderWidth: onPath ? 4 : 1,
+      font: { color: '#fff' },
+    };
+  }));
+
+  const edges = new vis.DataSet(graph.edges.map(e => {
+    const onPath = pathSet.has(e.source) && pathSet.has(e.target);
+    return {
+      from: e.source,
+      to: e.target,
+      arrows: 'to',
+      color: onPath ? { color: '#ffffff' } : { color: '#555' },
+      width: onPath ? 3 : 1,
+    };
+  }));
+
+  const container = document.getElementById('network');
+  const network = new vis.Network(container, { nodes, edges }, {
+    physics: { stabilization: true },
+    layout: { improvedLayout: true },
+  });
+
+  network.on('click', function (params) {
+    if (params.nodes.length === 0) return;
+    const nodeId = params.nodes[0];
+    const defense = analysis.defense_strategies[nodeId];
+    const risk = analysis.risk_scores[nodeId];
+    const panel = document.getElementById('panel');
+
+    if (!defense) {
+      panel.innerHTML = `<h3>${nodeId}</h3><p>위험도(GAT 예측): ${risk.toFixed(3)}</p><p>임계값 미만이라 방어전략이 생성되지 않았습니다.</p>`;
+      return;
+    }
+    if (defense.status === 'not_generated') {
+      panel.innerHTML = `<h3>${nodeId}</h3><p>위험도: ${risk.toFixed(3)}</p><p>방어전략이 아직 사전 생성되지 않았습니다. (Colab에서 run_defense.py 추가 실행 필요)</p>`;
+      return;
+    }
+
+    const imm = (defense.immediate_actions || []).map(a => `<li>${a}</li>`).join('');
+    const long = (defense.long_term_actions || []).map(a => `<li>${a}</li>`).join('');
+    const matchRate = defense.cisa_match_rate != null ? `${Math.round(defense.cisa_match_rate * 100)}%` : 'N/A';
+
+    panel.innerHTML = `
+      <h3>${nodeId} (위험도 ${risk.toFixed(3)})</h3>
+      <p>${defense.summary || ''}</p>
+      <b>즉시 조치</b><ul>${imm}</ul>
+      <b>장기 보완조치</b><ul>${long}</ul>
+      <p style="color:#aaa">CISA 공식가이드 일치율: ${matchRate}</p>
+    `;
+  });
+}
+
+main();
+</script>
+</body>
+</html>

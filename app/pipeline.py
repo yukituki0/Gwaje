@@ -1,30 +1,25 @@
 """
 앱(웹/API)에서 호출하는 메인 파이프라인.
-그래프 -> Dijkstra 경로 + GAT 추론 위험도 -> 위험 노드에 대해 LLM 방어전략 생성
-학습(train)은 절대 여기 포함되지 않음 (colab/train.py에서 미리 끝내고 옴).
+그래프 -> Dijkstra 경로 + GAT 추론 위험도 -> 사전 생성된 방어전략 조회
+LLM 생성은 여기서 하지 않음 (colab/run_defense.py에서 미리 만들어 둠, 절충안 - 연구방법론_정리.md 9.2/7장).
 """
 from core.detection.dijkstra import shortest_attack_path
-from core.defense.prompt_builder import build_prompt, build_node_info
-from core.defense.llm_client import generate_defense
-from core.defense.evaluator import match_rate
 from app.inference import predict_risk
+from app.defense_lookup import get_defense
 
 RISK_THRESHOLD = 0.6
 
 
 def run_pipeline(G, attacker_node: str = "attacker", target_node: str = "db_srv") -> dict:
     path_result = shortest_attack_path(G, attacker_node, target_node)
-    risk_scores = predict_risk(G)  # risk_score.py(공식계산) 대신 GAT 추론 사용
+    risk_scores = predict_risk(G)  # GAT 추론
 
     defense_results = []
     targets = [n for n, score in risk_scores.items() if score >= RISK_THRESHOLD]
 
     for node_id in targets:
-        info = build_node_info(node_id, G, risk_scores[node_id], path_result["path"])
-        prompt = build_prompt(info)
-        strategy = generate_defense(prompt)
-        eval_score = match_rate(info["cve"], strategy) if info["cve"] else None
-        defense_results.append({**info, **strategy, "cisa_match_rate": eval_score})
+        strategy = get_defense(node_id)  # LLM 즉석 호출 대신 사전 생성 결과 조회
+        defense_results.append({"node_id": node_id, "risk_score": risk_scores[node_id], **strategy})
 
     return {
         "path": path_result,
@@ -38,4 +33,6 @@ if __name__ == "__main__":
     G = build_base_network()
     result = run_pipeline(G)
     print("최적 경로:", " -> ".join(result["path"]["path"]))
-    print(f"방어전략 생성된 노드 수: {len(result['defense_strategies'])}")
+    for d in result["defense_strategies"]:
+        status = d.get("status", "generated")
+        print(f"  {d['node_id']}: {status}, summary={str(d.get('summary'))[:50]}")
