@@ -5,7 +5,7 @@ import json
 import os
 import re
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-flash-latest"
 
 _client = None
 
