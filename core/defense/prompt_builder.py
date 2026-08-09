@@ -10,13 +10,15 @@ CISA_GUIDANCE = {
 }
 
 
-def build_prompt(node_info):
+def build_prompt(node_info: dict) -> str:
     cve = node_info.get("cve")
     guidance_block = ""
     if cve and cve in CISA_GUIDANCE:
-        guidance_block = "\n[참고: 이 취약점의 공식 대응 가이드(CISA)]\n" + CISA_GUIDANCE[cve] + "\n위 공식 가이드의 핵심 조치를 반드시 즉시조치 항목에 포함하여 답하세요.\n"
+        guidance_block = "\n[참고: 이 취약점의 공식 대응 가이드(CISA)]\n" + CISA_GUIDANCE[cve] + "\n위 공식 가이드의 핵심 조치를 반드시 포함하여 답하세요.\n"
 
     parts = []
+    parts.append("중요: 반드시 한국어로만 답변하세요. 중국어, 영어 등 다른 언어를 절대 섞지 마세요.")
+    parts.append("")
     parts.append("당신은 보안 담당자를 지원하는 방어전략 자문 시스템입니다.")
     parts.append("")
     parts.append("아래 위험 노드 정보를 바탕으로 방어전략을 제시하세요.")
@@ -25,12 +27,13 @@ def build_prompt(node_info):
     parts.append(json.dumps(node_info, ensure_ascii=False, indent=2))
     parts.append(guidance_block)
     parts.append("다음을 수행하세요:")
-    parts.append("1. 이 취약점의 핵심 위험을 1~2문장으로 요약")
-    parts.append("2. 즉시 조치(patch/설정변경 등) 3가지 이내를 우선순위와 함께 제시")
-    parts.append("3. 장기적 보완조치 1~2가지 제시")
+    parts.append("1. 이 취약점의 핵심 위험을 2~3문장으로 설명")
+    parts.append("2. 즉시 조치를 우선순위 순으로 모두 나열 (개수 제한 없음, 관련된 조치는 빠짐없이 포함)")
+    parts.append("3. 장기적 보완조치를 관련된 것 모두 나열")
+    parts.append("4. 이 노드와 관련해 추가로 고려할 만한 위험이나 주의사항이 있다면 별도로 언급")
     parts.append("")
     parts.append("반드시 아래 JSON 형식으로만 답하세요. 다른 설명은 추가하지 마세요:")
-    parts.append('{"summary": "...", "immediate_actions": ["...", "..."], "long_term_actions": ["...", "..."]}')
+    parts.append('{"summary": "...", "immediate_actions": ["...", "..."], "long_term_actions": ["...", "..."], "additional_notes": "..."}')
     return "\n".join(parts)
 
 

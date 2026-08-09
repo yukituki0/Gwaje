@@ -96,9 +96,10 @@ async function main() {
       <h3>${nodeId} (위험도 ${risk.toFixed(3)})</h3>
       <p>${defense.summary || ''}</p>
       <b>즉시 조치</b><ul>${imm}</ul>
-      <b>장기 보완조치</b><ul>${long}</ul>
+      <b>장기 보완조치</b><ul>${long}</ul> 
       <p style="color:#aaa">CISA 공식가이드 일치율: ${matchRate}</p>
     `;
+    const notes = defense.additional_notes ? `<p><b>추가 고려사항</b>: ${defense.additional_notes}</p>` : '';
   });
 }
 
