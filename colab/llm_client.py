@@ -1,6 +1,5 @@
-# colab/llm_client.py (Gemini 버전)
 """
-Google Gemini API 기반 방어전략 생성 (무료 티어, 카드 등록 불필요)
+Google Gemini API 기반 방어전략 생성 (신규 google.genai SDK 사용)
 """
 import json
 import os
@@ -8,19 +7,18 @@ import re
 
 MODEL_NAME = "gemini-2.5-flash"
 
-_model = None
+_client = None
 
 
-def _get_model():
-    global _model
-    if _model is None:
-        import google.generativeai as genai
+def _get_client():
+    global _client
+    if _client is None:
+        from google import genai
         api_key = os.environ.get("GEMINI_API_KEY")
         if not api_key:
             raise RuntimeError("환경변수 GEMINI_API_KEY가 설정되지 않았습니다.")
-        genai.configure(api_key=api_key)
-        _model = genai.GenerativeModel(MODEL_NAME)
-    return _model
+        _client = genai.Client(api_key=api_key.strip())  # 혹시 모를 공백 제거
+    return _client
 
 
 def _extract_json(text: str) -> dict:
@@ -31,8 +29,11 @@ def _extract_json(text: str) -> dict:
 
 
 def generate_defense(prompt: str) -> dict:
-    model = _get_model()
-    response = model.generate_content(prompt)
+    client = _get_client()
+    response = client.models.generate_content(
+        model=MODEL_NAME,
+        contents=prompt,
+    )
     generated = response.text
 
     try:
