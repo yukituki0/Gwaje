@@ -1,4 +1,8 @@
-# core/defense/prompt_builder.py 수정
+%%writefile /content/Gwaje/core/defense/prompt_builder.py
+"""
+방어전략 생성용 프롬프트 구성 (연구방법론_정리.md 7.3절)
+"""
+import json
 
 CISA_GUIDANCE = {
     "CVE-2021-26855": "CISA AA21-062A 공식 대응: Exchange 서버 즉시 패치 적용, "
@@ -16,8 +20,10 @@ def build_prompt(node_info: dict) -> str:
     cve = node_info.get("cve")
     guidance_block = ""
     if cve and cve in CISA_GUIDANCE:
-        guidance_block = f"\n[참고: 이 취약점의 공식 대응 가이드(CISA)]\n{CISA_GUIDANCE[cve]}\n" \
-                          f"위 공식 가이드의 핵심 조치를 반드시 즉시조치 항목에 포함하여 답하세요.\n"
+        guidance_block = (
+            f"\n[참고: 이 취약점의 공식 대응 가이드(CISA)]\n{CISA_GUIDANCE[cve]}\n"
+            f"위 공식 가이드의 핵심 조치를 반드시 즉시조치 항목에 포함하여 답하세요.\n"
+        )
 
     return f"""당신은 보안 담당자를 지원하는 방어전략 자문 시스템입니다.
 
@@ -34,3 +40,22 @@ def build_prompt(node_info: dict) -> str:
 반드시 아래 JSON 형식으로만 답하세요. 다른 설명은 추가하지 마세요:
 {{"summary": "...", "immediate_actions": ["...", "..."], "long_term_actions": ["...", "..."]}}
 """
+
+
+def build_node_info(node_id: str, G, risk_score: float, main_path: list = None) -> dict:
+    attrs = G.nodes[node_id]
+    cve = None
+    for pred in G.predecessors(node_id):
+        edge_cve = G[pred][node_id].get("cve")
+        if edge_cve:
+            cve = edge_cve
+            break
+
+    return {
+        "node_id": node_id,
+        "risk_score": round(risk_score, 4),
+        "cve": cve,
+        "position": attrs.get("zone", "unknown"),
+        "attack_path": main_path or [],
+        "importance": attrs.get("importance", 0.0),
+    }
