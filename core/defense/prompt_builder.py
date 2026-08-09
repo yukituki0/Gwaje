@@ -1,20 +1,31 @@
-"""
-방어전략 생성용 프롬프트 구성 (연구방법론_정리.md 7.3절)
-"""
-import json
+# core/defense/prompt_builder.py 수정
+
+CISA_GUIDANCE = {
+    "CVE-2021-26855": "CISA AA21-062A 공식 대응: Exchange 서버 즉시 패치 적용, "
+                       "Test-ProxyLogon.ps1 스크립트로 침해 여부 스캔, "
+                       "패치 즉시 불가 시 EOMT(Exchange On-premises Mitigation Tool) 임시 적용",
+    "CVE-2017-0144": "CISA 공식 대응(MS17-010): 해당 패치 적용, SMBv1 프로토콜 비활성화, "
+                      "포트 445/137-139 외부 경계 차단, 네트워크 세그멘테이션 강화",
+    "CVE-2020-1472": "CISA 긴급지침 20-03 공식 대응: 2020년 8월 및 2021년 2월 보안패치 적용, "
+                      "도메인 컨트롤러 레지스트리에 FullSecureChannelProtection 값을 1로 설정하여 "
+                      "보안 RPC 채널 강제",
+}
 
 
 def build_prompt(node_info: dict) -> str:
-    """
-    node_info: {node_id, risk_score, cve, position, attack_path, importance}
-    """
+    cve = node_info.get("cve")
+    guidance_block = ""
+    if cve and cve in CISA_GUIDANCE:
+        guidance_block = f"\n[참고: 이 취약점의 공식 대응 가이드(CISA)]\n{CISA_GUIDANCE[cve]}\n" \
+                          f"위 공식 가이드의 핵심 조치를 반드시 즉시조치 항목에 포함하여 답하세요.\n"
+
     return f"""당신은 보안 담당자를 지원하는 방어전략 자문 시스템입니다.
 
 아래 위험 노드 정보를 바탕으로 방어전략을 제시하세요.
 
 [위험 노드 정보]
 {json.dumps(node_info, ensure_ascii=False, indent=2)}
-
+{guidance_block}
 다음을 수행하세요:
 1. 이 취약점의 핵심 위험을 1~2문장으로 요약
 2. 즉시 조치(patch/설정변경 등) 3가지 이내를 우선순위와 함께 제시
@@ -23,24 +34,3 @@ def build_prompt(node_info: dict) -> str:
 반드시 아래 JSON 형식으로만 답하세요. 다른 설명은 추가하지 마세요:
 {{"summary": "...", "immediate_actions": ["...", "..."], "long_term_actions": ["...", "..."]}}
 """
-
-
-def build_node_info(node_id: str, G, risk_score: float, main_path: list = None) -> dict:
-    """그래프에서 노드 정보를 뽑아 LLM 입력용 dict로 변환"""
-    attrs = G.nodes[node_id]
-    # 이 노드로 들어오는 엣지 중 CVE가 있으면 대표로 사용
-    cve = None
-    for pred in G.predecessors(node_id):
-        edge_cve = G[pred][node_id].get("cve")
-        if edge_cve:
-            cve = edge_cve
-            break
-
-    return {
-        "node_id": node_id,
-        "risk_score": round(risk_score, 4),
-        "cve": cve,
-        "position": attrs.get("zone", "unknown"),
-        "attack_path": main_path or [],
-        "importance": attrs.get("importance", 0.0),
-    }
