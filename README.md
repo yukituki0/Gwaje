@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 딥러닝 기반 동적 공격 그래프 경로 분석 및 방어 전략 시각화 연구
 
 전체 방법론은 `연구방법론_정리.md` 참고.
@@ -20,3 +21,6 @@
 
 ## 학습 환경 (Colab)
 `notebooks/colab_train_starter.ipynb` 참고 — GitHub clone, 의존성 설치, Drive 마운트, 학습, 가중치 저장까지 포함.
+=======
+# Gwaje
+>>>>>>> 8ede18bb670767a0b1de70bc78b343be41265edd
