@@ -21,14 +21,23 @@
 
 ## 폴더별 상세
 
-### `colab/` — Colab에서만 실행 (로컬에서 실행 금지, 무겁고 느림)
+### `colab/` — 무거운 연산 스크립트 (일부만 진짜 Colab 필요)
 
-| 파일 | 역할 | 실행 명령어 |
-|---|---|---|
-| `train.py` | GAT 모델 학습. 여러 그래프 인스턴스로 학습 후 `data/models/gat_model.pt` 저장 | `python -m colab.train` |
-| `evaluate.py` | 학습된 GAT가 실제로 위험 노드를 잘 잡는지 검증 (스피어만 상관계수) | `python -m colab.evaluate` |
-| `llm_client.py` | LLM 호출 함수 (`generate_defense`). 모델 교체 가능하게 감싸둠 | (직접 실행 안 함, run_defense.py가 사용) |
-| `run_defense.py` | 위험 노드마다 방어전략 생성 → `data/defense_strategies.jsonl` 저장 | `python -m colab.run_defense` |
+| 파일 | 역할 | 실행 명령어 | 실행 위치 |
+|---|---|---|---|
+| `train.py` | GAT 모델 학습. 여러 그래프 인스턴스로 학습 후 `data/models/gat_model.pt` 저장 | `python -m colab.train` | **Colab 필수 (GPU 권장)** |
+| `evaluate.py` | 학습된 GAT가 실제로 위험 노드를 잘 잡는지 검증 (스피어만 상관계수) | `python -m colab.evaluate` | Colab 권장 (학습 직후 확인용) |
+| `llm_client.py` | LLM 호출 함수 (`generate_defense`). Gemini API 사용 | (직접 실행 안 함) | **로컬에서도 OK** (API 호출이라 가벼움) |
+| `run_defense.py` | 위험 노드마다 방어전략 생성 → `data/defense_strategies.jsonl` 저장 | `python -m colab.run_defense` | **로컬에서도 OK** |
+
+> 처음엔 로컬 Qwen 모델(무거움, GPU 필요)을 썼다가 **Gemini API로 전환**하면서 `llm_client.py`/`run_defense.py`는 더 이상 Colab이 필요 없어졌음. 폴더명은 `colab/`이지만 실제로 Colab이 꼭 필요한 건 `train.py`(GAT 학습, GPU 필요) 뿐.
+
+**로컬에서 `run_defense.py` 실행 시 (Windows PowerShell 예시):**
+```powershell
+pip install google-genai
+$env:GEMINI_API_KEY="본인의_API_키"
+python -m colab.run_defense
+```
 
 ### `core/` — 공용 로직 (Colab과 앱 둘 다 사용)
 
@@ -69,16 +78,22 @@
 
 ## 전체 실행 순서
 
-### A. Colab에서 (최초 1회 또는 그래프/모델을 바꿀 때마다)
+### A. Colab에서 (GAT 학습, 그래프/모델을 바꿀 때마다)
 
 ```bash
 python -m colab.train          # GAT 학습 -> data/models/gat_model.pt
 python -m colab.evaluate       # 검증 (선택)
-python -m colab.run_defense    # 방어전략 생성 -> data/defense_strategies.jsonl
 ```
-생성된 `gat_model.pt`, `defense_strategies.jsonl`을 로컬 `data/`에 다운로드.
+생성된 `gat_model.pt`를 로컬 `data/models/`에 다운로드.
 
-### B. 로컬에서 (웹앱 실행, 매번)
+### B. 로컬에서 (방어전략 생성, 필요할 때마다 — Colab 불필요)
+
+```powershell
+$env:GEMINI_API_KEY="본인의_API_키"
+python -m colab.run_defense    # -> data/defense_strategies.jsonl
+```
+
+### C. 로컬에서 (웹앱 실행, 매번)
 
 ```bash
 python -m uvicorn api.main:app --reload
@@ -91,10 +106,12 @@ python -m uvicorn api.main:app --reload
 
 - [x] 그래프 생성, Dijkstra, risk_score, GAT 학습 — 완료, 검증됨 (스피어만 0.98)
 - [x] 웹 시각화 (위험도 색상/공격경로 강조/클릭 시 방어전략) — 완료
-- [ ] LLM 품질 개선 (현재 Qwen2.5-1.5B 소형모델 → 언어 혼입, CISA 일치율 편차 문제 있음. Claude API 전환 검토 중)
+- [x] LLM 방어전략 — Gemini API로 전환 완료, CISA 일치율 100% 확인
 - [ ] 보고서 작성
 
 ## 알려진 한계 (정직하게 기록)
 
-- GAT 학습 데이터는 단일 MITRE ATT&CK 체인의 변형 30개뿐 — 이 시나리오 범위 내 일반화만 검증됨 (8.3절)
-- 로컬 소형 LLM(Qwen2.5-1.5B)은 CISA 가이드 반영이 불안정하고 간헐적으로 언어가 섞임
+- GAT 학습 데이터는 단일 MITRE ATT&CK 체인의 변형 30개뿐 — 이 시나리오 범위 내 일반화만 검증됨 (연구방법론_정리.md 8.3절)
+- Gemini 무료 API 티어는 요청 한도·모델 가용성이 예고 없이 바뀔 수 있음 (모델명은 `gemini-flash-latest` 별칭 사용 권장)
+
+자세한 실험 결과와 발견한 문제/수정 내역은 `연구방법론_정리.md` 13장 참고.
