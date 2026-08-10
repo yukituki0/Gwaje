@@ -5,3 +5,4 @@ data/models/*.pt
 data/graphs/*.json
 data/*.jsonl
 .ipynb_checkpoints/
+data/config.json
