@@ -6,3 +6,7 @@ data/graphs/*.json
 data/*.jsonl
 .ipynb_checkpoints/
 data/config.json
+data/models/
+data/vulnet_networks/
+data/defense_strategies.jsonl
+data/external_labels_cache.json

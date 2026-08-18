@@ -6,7 +6,7 @@
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <style>
   body { margin: 0; font-family: sans-serif; background: #1a1a2e; color: #eee; }
-  #network { width: 100%; height: 70vh; border-bottom: 1px solid #444; }
+  #network { width: 100%; height: 85vh; border-bottom: 1px solid #444; }
   #panel { padding: 16px; min-height: 20vh; }
   #panel h3 { margin-top: 0; }
   .legend { padding: 8px 16px; font-size: 13px; }
@@ -69,38 +69,27 @@ async function main() {
 
   const container = document.getElementById('network');
   const network = new vis.Network(container, { nodes, edges }, {
-    physics: { stabilization: true },
+    physics: {
+      stabilization: { iterations: 200 },
+      barnesHut: {
+        gravitationalConstant: -8000,   // 노드끼리 더 세게 밀어냄
+        springLength: 150,               // 엣지 길이 더 길게
+        springConstant: 0.02,
+        damping: 0.4,
+      },
+    },
     layout: { improvedLayout: true },
-  });
-
-  network.on('click', function (params) {
-    if (params.nodes.length === 0) return;
-    const nodeId = params.nodes[0];
-    const defense = analysis.defense_strategies[nodeId];
-    const risk = analysis.risk_scores[nodeId];
-    const panel = document.getElementById('panel');
-
-    if (!defense) {
-      panel.innerHTML = `<h3>${nodeId}</h3><p>위험도(GAT 예측): ${risk.toFixed(3)}</p><p>임계값 미만이라 방어전략이 생성되지 않았습니다.</p>`;
-      return;
-    }
-    if (defense.status === 'not_generated') {
-      panel.innerHTML = `<h3>${nodeId}</h3><p>위험도: ${risk.toFixed(3)}</p><p>방어전략이 아직 사전 생성되지 않았습니다. (Colab에서 run_defense.py 추가 실행 필요)</p>`;
-      return;
-    }
-
-    const imm = (defense.immediate_actions || []).map(a => `<li>${a}</li>`).join('');
-    const long = (defense.long_term_actions || []).map(a => `<li>${a}</li>`).join('');
-    const matchRate = defense.cisa_match_rate != null ? `${Math.round(defense.cisa_match_rate * 100)}%` : 'N/A';
-
-    panel.innerHTML = `
-      <h3>${nodeId} (위험도 ${risk.toFixed(3)})</h3>
-      <p>${defense.summary || ''}</p>
-      <b>즉시 조치</b><ul>${imm}</ul>
-      <b>장기 보완조치</b><ul>${long}</ul> 
-      <p style="color:#aaa">CISA 공식가이드 일치율: ${matchRate}</p>
-    `;
-    const notes = defense.additional_notes ? `<p><b>추가 고려사항</b>: ${defense.additional_notes}</p>` : '';
+    nodes: {
+      font: { size: 12 },
+      scaling: { min: 10, max: 30 },
+    },
+    edges: {
+      smooth: { type: 'continuous' },
+    },
+    interaction: {
+      zoomView: true,
+      dragView: true,
+    },
   });
 }
 

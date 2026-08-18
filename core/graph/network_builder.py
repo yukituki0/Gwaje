@@ -18,31 +18,30 @@
 import random
 import networkx as nx
 
-# 6.3절 노드 구성표를 그대로 옮김
 NODES = {
-    "attacker":            dict(zone="external", vulnerability_score=0.0, privilege_level=0, importance=0.0, is_compromised=False, patch_status=False),
+    "attacker":          dict(zone="external", vulnerability_score=0.0, privilege_level=0, importance=0.0, is_compromised=False, patch_status=False, cve=None),
 
-    "web_dmz":              dict(zone="dmz", vulnerability_score=0.98, privilege_level=1, importance=0.6, is_compromised=False, patch_status=False),  # CVE-2021-26855
-    "mail_dmz":             dict(zone="dmz", vulnerability_score=0.15, privilege_level=1, importance=0.5, is_compromised=False, patch_status=True),
-    "vpn_dmz":              dict(zone="dmz", vulnerability_score=0.45, privilege_level=1, importance=0.5, is_compromised=False, patch_status=False),
+    "web_dmz":            dict(zone="dmz", vulnerability_score=0.98, privilege_level=1, importance=0.6, is_compromised=False, patch_status=False, cve="CVE-2021-26855"),
+    "mail_dmz":  dict(zone="dmz", vulnerability_score=0.15, privilege_level=1, importance=0.5, is_compromised=False, patch_status=True, cve="CVE-2024-0646"),
+    "vpn_dmz":            dict(zone="dmz", vulnerability_score=0.45, privilege_level=1, importance=0.5, is_compromised=False, patch_status=False, cve="CVE-2019-11510"),
 
-    "internal_srv01":      dict(zone="internal", vulnerability_score=0.93, privilege_level=1, importance=0.7, is_compromised=False, patch_status=False),  # CVE-2017-0144
-    "file_srv":             dict(zone="internal", vulnerability_score=0.30, privilege_level=1, importance=0.5, is_compromised=False, patch_status=True),
-    "print_srv":            dict(zone="internal", vulnerability_score=0.20, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True),
-    "webapp_srv":           dict(zone="internal", vulnerability_score=0.55, privilege_level=1, importance=0.5, is_compromised=False, patch_status=False),
-    "backup_srv":           dict(zone="internal", vulnerability_score=0.35, privilege_level=1, importance=0.6, is_compromised=False, patch_status=True),
+    "internal_srv01":    dict(zone="internal", vulnerability_score=0.93, privilege_level=1, importance=0.7, is_compromised=False, patch_status=False, cve="CVE-2017-0144"),
+    "file_srv":  dict(zone="internal", vulnerability_score=0.30, privilege_level=1, importance=0.5, is_compromised=False, patch_status=True, cve="CVE-2023-38039"),
+    "print_srv": dict(zone="internal", vulnerability_score=0.20, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True, cve="CVE-2024-21626"),
+    "webapp_srv":         dict(zone="internal", vulnerability_score=0.55, privilege_level=1, importance=0.5, is_compromised=False, patch_status=False, cve="CVE-2021-44228"),
+    "backup_srv":    dict(zone="internal", vulnerability_score=0.35, privilege_level=1, importance=0.6, is_compromised=False, patch_status=True, cve="CVE-2021-3156"),
 
-    "pc01":                  dict(zone="internal", vulnerability_score=0.40, privilege_level=1, importance=0.3, is_compromised=False, patch_status=False),
-    "pc02":                  dict(zone="internal", vulnerability_score=0.38, privilege_level=1, importance=0.3, is_compromised=False, patch_status=False),
-    "pc03":                  dict(zone="internal", vulnerability_score=0.25, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True),
-    "pc04":                  dict(zone="internal", vulnerability_score=0.22, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True),
-    "pc05":                  dict(zone="internal", vulnerability_score=0.28, privilege_level=1, importance=0.2, is_compromised=False, patch_status=False),
+    "pc01":                dict(zone="internal", vulnerability_score=0.40, privilege_level=1, importance=0.3, is_compromised=False, patch_status=False, cve="CVE-2017-11882"),
+    "pc02":                dict(zone="internal", vulnerability_score=0.38, privilege_level=1, importance=0.3, is_compromised=False, patch_status=False, cve="CVE-2023-23397"),
+    "pc03":          dict(zone="internal", vulnerability_score=0.25, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True, cve="CVE-2021-3449"),
+    "pc04":          dict(zone="internal", vulnerability_score=0.22, privilege_level=1, importance=0.2, is_compromised=False, patch_status=True, cve="CVE-2022-3602"),
+    "pc05":                dict(zone="internal", vulnerability_score=0.28, privilege_level=1, importance=0.2, is_compromised=False, patch_status=False, cve="CVE-2021-26411"),
 
-    "domain_controller":    dict(zone="core", vulnerability_score=0.96, privilege_level=2, importance=1.0, is_compromised=False, patch_status=False),  # CVE-2020-1472
-    "db_srv":                dict(zone="core", vulnerability_score=0.60, privilege_level=2, importance=1.0, is_compromised=False, patch_status=True),
+    "domain_controller":  dict(zone="core", vulnerability_score=0.96, privilege_level=2, importance=1.0, is_compromised=False, patch_status=False, cve="CVE-2020-1472"),
+    "db_srv":              dict(zone="core", vulnerability_score=0.60, privilege_level=2, importance=1.0, is_compromised=False, patch_status=True, cve="CVE-2012-2122"),
 
-    "router":                dict(zone="network", vulnerability_score=0.20, privilege_level=0, importance=0.4, is_compromised=False, patch_status=True),
-    "switch_backup":         dict(zone="network", vulnerability_score=0.18, privilege_level=0, importance=0.3, is_compromised=False, patch_status=True),
+    "router":        dict(zone="network", vulnerability_score=0.20, privilege_level=0, importance=0.4, is_compromised=False, patch_status=True, cve="CVE-2022-22965"),
+    "switch_backup": dict(zone="network", vulnerability_score=0.18, privilege_level=0, importance=0.3, is_compromised=False, patch_status=True, cve="CVE-2023-4863"),
 }
 
 MAIN_PATH_EDGES = [
@@ -67,6 +66,7 @@ BACKGROUND_EDGES = [
     ("file_srv", "pc05",             dict(attack_cost=0.65, success_prob=0.28, protocol="SMB",   cve=None)),
     ("router", "internal_srv01",     dict(attack_cost=0.50, success_prob=0.40, protocol="SNMP",  cve=None)),
     ("switch_backup", "file_srv",    dict(attack_cost=0.55, success_prob=0.35, protocol="SNMP",  cve=None)),
+    ("vpn_dmz", "domain_controller", dict(attack_cost=0.35, success_prob=0.55, protocol="RDP", cve=None)),
 ]
 
 
@@ -116,6 +116,22 @@ def generate_multiple_instances(n: int, base_seed: int = 0) -> list:
     """n개의 서로 다른 배경 구성 인스턴스 생성"""
     return [generate_instance(seed=base_seed + i) for i in range(n)]
 
+def apply_real_cvss(G: nx.DiGraph):
+    """
+    각 노드의 vulnerability_score를, 임의로 넣은 값 대신 NVD의 실제 CVSS로 덮어씀.
+    (지도교수 피드백: 입력 특성값도 근거 없는 임의값이었던 문제 대응)
+    """
+    from core.detection.external_labels import get_real_cvss_scores
+
+    cve_list = [G.nodes[n]["cve"] for n in G.nodes if G.nodes[n].get("cve")]
+    real_scores = get_real_cvss_scores(cve_list)
+
+    for n in G.nodes:
+        cve = G.nodes[n].get("cve")
+        if cve and real_scores.get(cve) is not None:
+            G.nodes[n]["vulnerability_score"] = real_scores[cve]
+        # cve가 없는 노드(attacker)나 조회 실패 시 기존 값 유지
+    return G
 
 if __name__ == "__main__":
     G = build_base_network()

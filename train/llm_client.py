@@ -4,7 +4,7 @@ Google Gemini API 기반 방어전략 생성
 import json
 import re
 
-MODEL_NAME = "gemini-flash-latest"
+MODEL_NAME = "gemini-flash-lite-latest"
 
 _client = None
 

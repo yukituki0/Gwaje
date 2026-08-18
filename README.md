@@ -11,7 +11,7 @@
 
 | 영역 | 실행 주체 | 특징 |
 |---|---|---|
-| `colab/` | **Colab (GPU)** | 무거운 연산 (GAT 학습, LLM 방어전략 생성). 결과만 파일로 저장하고 끝. 앱과 무관. |
+| `train/` | **Colab (GPU)** | 무거운 연산 (GAT 학습, LLM 방어전략 생성). 결과만 파일로 저장하고 끝. 앱과 무관. |
 | `core/` | 양쪽 공용 | 그래프 정의, 알고리즘 로직. Colab과 앱(로컬) 둘 다 이 코드를 가져다 씀. |
 | `app/`, `api/`, `web/` | **로컬/서버 (웹앱)** | 실제 사용자가 만지는 부분. **학습이나 LLM 즉석 호출을 절대 하지 않음** — Colab이 미리 만들어둔 결과(가중치, 방어전략 파일)를 읽기만 함. |
 
@@ -21,22 +21,22 @@
 
 ## 폴더별 상세
 
-### `colab/` — 무거운 연산 스크립트 (일부만 진짜 Colab 필요)
+### `train/` — 무거운 연산 스크립트 (일부만 진짜 Colab 필요)
 
 | 파일 | 역할 | 실행 명령어 | 실행 위치 |
 |---|---|---|---|
-| `train.py` | GAT 모델 학습. 여러 그래프 인스턴스로 학습 후 `data/models/gat_model.pt` 저장 | `python -m colab.train` | **Colab 필수 (GPU 권장)** |
-| `evaluate.py` | 학습된 GAT가 실제로 위험 노드를 잘 잡는지 검증 (스피어만 상관계수) | `python -m colab.evaluate` | Colab 권장 (학습 직후 확인용) |
+| `train.py` | GAT 모델 학습. 여러 그래프 인스턴스로 학습 후 `data/models/gat_model.pt` 저장 | `python -m train.train` | **Colab 필수 (GPU 권장)** |
+| `evaluate.py` | 학습된 GAT가 실제로 위험 노드를 잘 잡는지 검증 (스피어만 상관계수) | `python -m train.evaluate` | Colab 권장 (학습 직후 확인용) |
 | `llm_client.py` | LLM 호출 함수 (`generate_defense`). Gemini API 사용 | (직접 실행 안 함) | **로컬에서도 OK** (API 호출이라 가벼움) |
-| `run_defense.py` | 위험 노드마다 방어전략 생성 → `data/defense_strategies.jsonl` 저장 | `python -m colab.run_defense` | **로컬에서도 OK** |
+| `run_defense.py` | 위험 노드마다 방어전략 생성 → `data/defense_strategies.jsonl` 저장 | `python -m train.run_defense` | **로컬에서도 OK** |
 
-> 처음엔 로컬 Qwen 모델(무거움, GPU 필요)을 썼다가 **Gemini API로 전환**하면서 `llm_client.py`/`run_defense.py`는 더 이상 Colab이 필요 없어졌음. 폴더명은 `colab/`이지만 실제로 Colab이 꼭 필요한 건 `train.py`(GAT 학습, GPU 필요) 뿐.
+> 처음엔 로컬 Qwen 모델(무거움, GPU 필요)을 썼다가 **Gemini API로 전환**하면서 `llm_client.py`/`run_defense.py`는 더 이상 Colab이 필요 없어졌음. 폴더명은 `train/`이지만 실제로 Colab이 꼭 필요한 건 `train.py`(GAT 학습, GPU 필요) 뿐.
 
 **로컬에서 `run_defense.py` 실행 시 (Windows PowerShell 예시):**
 ```powershell
 pip install google-genai
 $env:GEMINI_API_KEY="본인의_API_키"
-python -m colab.run_defense
+python -m train.run_defense
 ```
 
 ### `core/` — 공용 로직 (Colab과 앱 둘 다 사용)
@@ -70,8 +70,8 @@ python -m colab.run_defense
 
 | 경로 | 내용 | 어떻게 채우나 |
 |---|---|---|
-| `models/gat_model.pt` | 학습된 GAT 가중치 | Colab에서 `colab/train.py` 실행 후 다운로드해서 이 경로에 넣기 |
-| `defense_strategies.jsonl` | 사전생성된 방어전략 | Colab에서 `colab/run_defense.py` 실행 후 다운로드해서 이 경로에 넣기 |
+| `models/gat_model.pt` | 학습된 GAT 가중치 | Colab에서 `train/train.py` 실행 후 다운로드해서 이 경로에 넣기 |
+| `defense_strategies.jsonl` | 사전생성된 방어전략 | Colab에서 `train/run_defense.py` 실행 후 다운로드해서 이 경로에 넣기 |
 | `graphs/` | (현재 미사용) | 향후 동적 그래프 타임스텝 스냅샷을 저장할 자리로 비워둠 |
 
 ---
@@ -81,8 +81,8 @@ python -m colab.run_defense
 ### A. Colab에서 (GAT 학습, 그래프/모델을 바꿀 때마다)
 
 ```bash
-python -m colab.train          # GAT 학습 -> data/models/gat_model.pt
-python -m colab.evaluate       # 검증 (선택)
+python -m train.train          # GAT 학습 -> data/models/gat_model.pt
+python -m train.evaluate       # 검증 (선택)
 ```
 생성된 `gat_model.pt`를 로컬 `data/models/`에 다운로드.
 
@@ -90,7 +90,7 @@ python -m colab.evaluate       # 검증 (선택)
 
 ```powershell
 $env:GEMINI_API_KEY="본인의_API_키"
-python -m colab.run_defense    # -> data/defense_strategies.jsonl
+python -m train.run_defense    # -> data/defense_strategies.jsonl
 ```
 
 ### C. 로컬에서 (웹앱 실행, 매번)
