@@ -39,7 +39,7 @@
   .header-top { justify-content: space-between; gap: 20px; }
   .title-block h1 { margin: 0; font-size: 24px; }
   .title-block p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-  .view-switcher { gap: 8px; flex-shrink: 0; }
+  .view-switcher { justify-content: flex-end; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
   .view-button {
     padding: 9px 14px;
     border: 1px solid var(--border);
@@ -64,6 +64,19 @@
   .stat-value { display: block; margin-top: 5px; font-size: 21px; font-weight: 700; }
   .legend { flex-wrap: wrap; gap: 16px; margin-top: 14px; color: var(--muted); font-size: 13px; }
   .dot { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 50%; }
+  .line-swatch { display: inline-block; width: 18px; height: 3px; margin: 0 5px 3px 0; border-radius: 2px; }
+  .path-summary {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 6px 12px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .path-label { font-weight: 700; }
+  .path-label.original { color: #4da3ff; }
+  .path-label.gat { color: #ff8a65; }
+  .path-status { grid-column: 1 / -1; color: var(--text); }
   .workspace {
     display: grid;
     grid-template-columns: minmax(0, 4fr) minmax(300px, 1fr);
@@ -126,7 +139,9 @@
       <p>GAT 위험도와 Dijkstra 공격 경로를 기반으로 네트워크 위험을 분석합니다.</p>
     </div>
     <nav class="view-switcher" aria-label="보기 전환">
-      <button class="view-button active" type="button" data-edge-mode="path" aria-pressed="true">공격 경로</button>
+      <button class="view-button" type="button" data-edge-mode="original" aria-pressed="false">원래 경로</button>
+      <button class="view-button active" type="button" data-edge-mode="gat" aria-pressed="true">GAT 반영 경로</button>
+      <button class="view-button" type="button" data-edge-mode="compare" aria-pressed="false">두 경로 비교</button>
       <button class="view-button" type="button" data-edge-mode="selected" aria-pressed="false">선택 노드</button>
       <button class="view-button" type="button" data-edge-mode="all" aria-pressed="false">전체 네트워크</button>
       <a class="view-button settings-button" href="/admin.html">설정</a>
@@ -142,7 +157,15 @@
     <span><span class="dot" style="background:#2ecc71"></span>낮음 (&lt;0.3)</span>
     <span><span class="dot" style="background:#f1c40f"></span>중간 (0.3~0.7)</span>
     <span><span class="dot" style="background:#e74c3c"></span>높음 (&gt;0.7)</span>
+    <span><span class="line-swatch" style="background:#4da3ff"></span>원래 경로</span>
+    <span><span class="line-swatch" style="background:#ff8a65"></span>GAT 반영 경로</span>
+    <span><span class="line-swatch" style="background:#ffffff"></span>공통 경로</span>
     <span>굵은 테두리 = 공격 경로 상 노드</span>
+  </div>
+  <div class="path-summary" aria-label="공격 경로 비교">
+    <span class="path-label original">원래 Dijkstra</span><span id="original-path-text">-</span>
+    <span class="path-label gat">GAT 반영 후</span><span id="gat-path-text">-</span>
+    <strong class="path-status" id="path-change-status">경로 비교 중</strong>
   </div>
 </header>
 
@@ -166,7 +189,10 @@ async function main() {
   const analysis = await analysisRes.json();
 
   const pathSet = new Set(analysis.attack_path);
-  const pathEdgeSet = new Set(
+  const originalPathEdgeSet = new Set(
+    analysis.original_path.slice(0, -1).map((nodeId, index) => `${nodeId}->${analysis.original_path[index + 1]}`)
+  );
+  const gatPathEdgeSet = new Set(
     analysis.attack_path.slice(0, -1).map((nodeId, index) => `${nodeId}->${analysis.attack_path[index + 1]}`)
   );
   const highRiskCount = Object.values(analysis.risk_scores).filter(score => score >= 0.7).length;
@@ -175,6 +201,11 @@ async function main() {
   document.getElementById('edge-count').textContent = graph.edges.length.toLocaleString();
   document.getElementById('high-risk-count').textContent = highRiskCount.toLocaleString();
   document.getElementById('path-length').textContent = `${analysis.attack_path.length}개 노드`;
+  document.getElementById('original-path-text').textContent = analysis.original_path.join(' → ') || '경로 없음';
+  document.getElementById('gat-path-text').textContent = analysis.attack_path.join(' → ') || '경로 없음';
+  document.getElementById('path-change-status').textContent = analysis.path_changed
+    ? 'GAT 위험도 반영 후 공격 경로가 변경되었습니다.'
+    : '경로 변경 없음 — 원래 경로와 GAT 반영 경로가 동일합니다.';
 
   function riskColor(score) {
     if (score >= 0.7) return '#e74c3c';
@@ -197,12 +228,13 @@ async function main() {
   const edgeRecords = graph.edges.map((e, index) => {
     const source = String(e.source);
     const target = String(e.target);
-    const onPath = pathEdgeSet.has(`${source}->${target}`);
+    const edgeKey = `${source}->${target}`;
     return {
       id: `edge-${index}`,
       source,
       target,
-      onPath,
+      onOriginalPath: originalPathEdgeSet.has(edgeKey),
+      onGatPath: gatPathEdgeSet.has(edgeKey),
     };
   });
 
@@ -216,18 +248,33 @@ async function main() {
     }
     if (mode === 'all') {
       return {
-        color: { color: edge.onPath ? '#ffffff' : 'rgba(120, 130, 165, 0.16)' },
-        width: edge.onPath ? 3 : 0.6,
+        color: { color: edge.onGatPath ? '#ff8a65' : 'rgba(120, 130, 165, 0.16)' },
+        width: edge.onGatPath ? 3 : 0.6,
+      };
+    }
+    if (mode === 'original') {
+      return {
+        color: { color: edge.onOriginalPath ? '#4da3ff' : 'rgba(120, 130, 165, 0.015)' },
+        width: edge.onOriginalPath ? 3 : 0.2,
+      };
+    }
+    if (mode === 'compare') {
+      const pathColor = edge.onOriginalPath && edge.onGatPath
+        ? '#ffffff'
+        : edge.onOriginalPath ? '#4da3ff' : edge.onGatPath ? '#ff8a65' : 'rgba(120, 130, 165, 0.015)';
+      return {
+        color: { color: pathColor },
+        width: edge.onOriginalPath || edge.onGatPath ? 3 : 0.2,
       };
     }
     return {
-      color: { color: edge.onPath ? '#ffffff' : 'rgba(120, 130, 165, 0.015)' },
-      width: edge.onPath ? 3 : 0.2,
+      color: { color: edge.onGatPath ? '#ff8a65' : 'rgba(120, 130, 165, 0.015)' },
+      width: edge.onGatPath ? 3 : 0.2,
     };
   }
 
   const edges = new vis.DataSet(edgeRecords.map(edge => {
-    const style = edgeStyle(edge, 'path');
+    const style = edgeStyle(edge, 'gat');
     return {
       id: edge.id,
       from: edge.source,
@@ -265,7 +312,7 @@ async function main() {
   const panel = document.getElementById('panel');
   const defaultPanelContent = '<div class="panel-content"><p class="empty-state">노드를 클릭하면 상세정보와 방어전략이 표시됩니다.</p></div>';
   const modeButtons = [...document.querySelectorAll('[data-edge-mode]')];
-  let edgeMode = 'path';
+  let edgeMode = 'gat';
   let selectedNodeId = null;
 
   function applyEdgeMode(mode) {
@@ -303,7 +350,7 @@ async function main() {
     if (params.nodes.length === 0) {
       panel.innerHTML = defaultPanelContent;
       selectedNodeId = null;
-      if (edgeMode === 'selected') applyEdgeMode('path');
+      if (edgeMode === 'selected') applyEdgeMode('gat');
       return;
     }
 
