@@ -51,6 +51,7 @@
     cursor: pointer;
   }
   .view-button.active { border-color: var(--accent); color: var(--accent); }
+  .settings-button { margin-left: 4px; }
   .stats { gap: 12px; margin-top: 18px; }
   .stat-card {
     min-width: 130px;
@@ -65,7 +66,7 @@
   .dot { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 50%; }
   .workspace {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(460px, 0.85fr);
+    grid-template-columns: minmax(0, 4fr) minmax(300px, 1fr);
     gap: 16px;
     padding: 16px;
     flex: 1;
@@ -125,8 +126,10 @@
       <p>GAT 위험도와 Dijkstra 공격 경로를 기반으로 네트워크 위험을 분석합니다.</p>
     </div>
     <nav class="view-switcher" aria-label="보기 전환">
-      <a class="view-button active" href="/" aria-current="page">그래프 보기</a>
-      <a class="view-button" href="/admin.html">설정 보기</a>
+      <button class="view-button active" type="button" data-edge-mode="path" aria-pressed="true">공격 경로</button>
+      <button class="view-button" type="button" data-edge-mode="selected" aria-pressed="false">선택 노드</button>
+      <button class="view-button" type="button" data-edge-mode="all" aria-pressed="false">전체 네트워크</button>
+      <a class="view-button settings-button" href="/admin.html">설정</a>
     </nav>
   </div>
   <div class="stats" aria-label="핵심 통계">
@@ -163,6 +166,9 @@ async function main() {
   const analysis = await analysisRes.json();
 
   const pathSet = new Set(analysis.attack_path);
+  const pathEdgeSet = new Set(
+    analysis.attack_path.slice(0, -1).map((nodeId, index) => `${nodeId}->${analysis.attack_path[index + 1]}`)
+  );
   const highRiskCount = Object.values(analysis.risk_scores).filter(score => score >= 0.7).length;
 
   document.getElementById('node-count').textContent = graph.nodes.length.toLocaleString();
@@ -188,14 +194,46 @@ async function main() {
     };
   }));
 
-  const edges = new vis.DataSet(graph.edges.map(e => {
-    const onPath = pathSet.has(e.source) && pathSet.has(e.target);
+  const edgeRecords = graph.edges.map((e, index) => {
+    const source = String(e.source);
+    const target = String(e.target);
+    const onPath = pathEdgeSet.has(`${source}->${target}`);
     return {
-      from: e.source,
-      to: e.target,
+      id: `edge-${index}`,
+      source,
+      target,
+      onPath,
+    };
+  });
+
+  function edgeStyle(edge, mode, selectedNodeId = null) {
+    if (mode === 'selected') {
+      const isConnected = edge.source === selectedNodeId || edge.target === selectedNodeId;
+      return {
+        color: { color: isConnected ? '#7fd1ff' : 'rgba(0, 0, 0, 0)' },
+        width: isConnected ? 2.5 : 0.1,
+      };
+    }
+    if (mode === 'all') {
+      return {
+        color: { color: edge.onPath ? '#ffffff' : 'rgba(120, 130, 165, 0.16)' },
+        width: edge.onPath ? 3 : 0.6,
+      };
+    }
+    return {
+      color: { color: edge.onPath ? '#ffffff' : 'rgba(120, 130, 165, 0.015)' },
+      width: edge.onPath ? 3 : 0.2,
+    };
+  }
+
+  const edges = new vis.DataSet(edgeRecords.map(edge => {
+    const style = edgeStyle(edge, 'path');
+    return {
+      id: edge.id,
+      from: edge.source,
+      to: edge.target,
       arrows: 'to',
-      color: onPath ? { color: '#ffffff' } : { color: '#555' },
-      width: onPath ? 3 : 1,
+      ...style,
     };
   }));
 
@@ -226,6 +264,27 @@ async function main() {
 
   const panel = document.getElementById('panel');
   const defaultPanelContent = '<div class="panel-content"><p class="empty-state">노드를 클릭하면 상세정보와 방어전략이 표시됩니다.</p></div>';
+  const modeButtons = [...document.querySelectorAll('[data-edge-mode]')];
+  let edgeMode = 'path';
+  let selectedNodeId = null;
+
+  function applyEdgeMode(mode) {
+    edgeMode = mode;
+    if (mode !== 'selected') network.unselectAll();
+    edges.update(edgeRecords.map(edge => ({
+      id: edge.id,
+      ...edgeStyle(edge, mode, selectedNodeId),
+    })));
+    modeButtons.forEach(button => {
+      const isActive = button.dataset.edgeMode === mode;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  modeButtons.forEach(button => {
+    button.addEventListener('click', () => applyEdgeMode(button.dataset.edgeMode));
+  });
 
   function escapeHtml(value) {
     return String(value)
@@ -243,10 +302,14 @@ async function main() {
   network.on('click', params => {
     if (params.nodes.length === 0) {
       panel.innerHTML = defaultPanelContent;
+      selectedNodeId = null;
+      if (edgeMode === 'selected') applyEdgeMode('path');
       return;
     }
 
     const nodeId = String(params.nodes[0]);
+    selectedNodeId = nodeId;
+    applyEdgeMode('selected');
     const node = graph.nodes.find(item => String(item.id) === nodeId);
     const risk = analysis.risk_scores[nodeId] ?? 0;
     const nodeDetails = `
