@@ -30,8 +30,9 @@ def get_defense(node_id: str) -> dict:
     없으면 '생성 필요' 상태를 담은 placeholder 반환 (수동으로 Colab에서 추가 생성 필요함을 표시).
     """
     strategies = load_strategies()
-    if node_id in strategies:
-        return strategies[node_id]
+    lookup_id = str(node_id)
+    if lookup_id in strategies:
+        return strategies[lookup_id]
     return {
         "node_id": node_id,
         "summary": None,

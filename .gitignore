@@ -10,3 +10,4 @@ data/models/
 data/vulnet_networks/
 data/defense_strategies.jsonl
 data/external_labels_cache.json
+.venv/

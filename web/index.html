@@ -91,6 +91,52 @@ async function main() {
       dragView: true,
     },
   });
+
+  const panel = document.getElementById('panel');
+  const defaultPanelContent = '<p>노드를 클릭하면 방어전략이 여기 표시됩니다.</p>';
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
+
+  function actionList(actions) {
+    return `<ul>${actions.map(action => `<li>${escapeHtml(action)}</li>`).join('')}</ul>`;
+  }
+
+  network.on('click', params => {
+    if (params.nodes.length === 0) {
+      panel.innerHTML = defaultPanelContent;
+      return;
+    }
+
+    const nodeId = String(params.nodes[0]);
+    const strategy = analysis.defense_strategies?.[nodeId];
+    if (!strategy || strategy.status === 'not_generated' || !strategy.summary) {
+      panel.innerHTML = `<h3>노드 ${escapeHtml(nodeId)}</h3><p>사전 생성된 방어전략이 없습니다</p>`;
+      return;
+    }
+
+    const immediateActions = Array.isArray(strategy.immediate_actions) ? strategy.immediate_actions : [];
+    const longTermActions = Array.isArray(strategy.long_term_actions) ? strategy.long_term_actions : [];
+    const additionalNotes = strategy.additional_notes
+      ? `<h4>추가 참고사항</h4><p>${escapeHtml(strategy.additional_notes)}</p>`
+      : '';
+
+    panel.innerHTML = `
+      <h3>노드 ${escapeHtml(nodeId)} 방어전략</h3>
+      <p>${escapeHtml(strategy.summary)}</p>
+      <h4>즉시 조치</h4>
+      ${actionList(immediateActions)}
+      <h4>장기 조치</h4>
+      ${actionList(longTermActions)}
+      ${additionalNotes}
+    `;
+  });
 }
 
 main();
