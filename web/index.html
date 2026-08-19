@@ -52,6 +52,13 @@
   .mode-button:hover, .small-button:hover:not(:disabled) { border-color: var(--border-strong); background: var(--surface-hover); }
   .mode-button.active { border-color: var(--accent); color: var(--accent); background: #192a40; }
   .mode-button.overlay-active { border-color: #82d9ff; color: #b8eaff; }
+  .selection-controls { display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: 8px; }
+  .control-group { display: inline-flex; align-items: center; gap: 5px; }
+  .control-label { color: var(--muted); font-size: 11px; font-weight: 700; }
+  .selection-help { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 11px; }
+  .filter-button { padding: 5px 8px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--muted); cursor: pointer; }
+  .filter-button.active { border-color: var(--accent); background: #192a40; color: var(--accent); }
+  .filter-button:disabled { opacity: 0.4; cursor: not-allowed; }
   .mode-status { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
   .complexity-notice {
     margin: 8px 0 0; padding: 7px 10px; border: 1px solid #675d35; border-radius: 7px;
@@ -69,6 +76,8 @@
     border: 2px solid; border-radius: 50%; vertical-align: -3px;
   }
   .line-swatch { display: inline-block; width: 18px; height: 3px; margin: 0 4px 3px 0; border-radius: 2px; }
+  .device-swatch { display: inline-grid; width: 24px; height: 24px; margin-right: 5px; place-items: center; vertical-align: middle; }
+  .device-swatch svg { display: block; width: 100%; height: 100%; }
   .path-summary {
     grid-column: 1 / -1; display: grid; grid-template-columns: max-content minmax(0, 1fr);
     gap: 4px 10px; padding-top: 10px; border-top: 1px solid var(--border);
@@ -151,6 +160,8 @@
     .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .mode-toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .mode-button { min-width: 0; padding-inline: 8px; }
+    .selection-controls { display: grid; grid-template-columns: 1fr; }
+    .control-group { flex-wrap: wrap; }
     .workspace { padding: 8px; }
     .card-toolbar { align-items: flex-start; flex-direction: column; }
     .search-form { width: 100%; min-width: 0; }
@@ -177,16 +188,32 @@
         <button class="mode-button" type="button" data-graph-mode="original" aria-pressed="false">기본 최단 경로</button>
         <button class="mode-button active" type="button" data-graph-mode="gat" aria-pressed="true">GAT 위험도 반영 경로</button>
         <button class="mode-button" type="button" data-graph-mode="compare" aria-pressed="false">두 경로 비교</button>
-        <button class="mode-button overlay-active" id="selection-overlay-button" type="button" aria-pressed="true">선택 연결 강조</button>
+        <button class="mode-button overlay-active" id="selection-overlay-button" type="button" aria-pressed="true" disabled>선택 연결 강조</button>
         <button class="mode-button" type="button" data-graph-mode="all" aria-pressed="false">전체 네트워크</button>
+        <button class="mode-button" id="all-labels-button" type="button" aria-pressed="false">모든 노드 번호 표시</button>
+      </div>
+      <div class="selection-controls" aria-label="선택 노드 잠재적 연결 표시 설정">
+        <div class="control-group"><span class="control-label">방향</span>
+          <button class="filter-button" type="button" data-selection-direction="incoming" disabled>공격 유입</button>
+          <button class="filter-button" type="button" data-selection-direction="outgoing" disabled>공격 이동</button>
+          <button class="filter-button active" type="button" data-selection-direction="both" disabled>양방향</button>
+        </div>
+        <div class="control-group"><span class="control-label">표시 수</span>
+          <button class="filter-button active" type="button" data-selection-limit="5" disabled>주요 연결 5개</button>
+          <button class="filter-button" type="button" data-selection-limit="10" disabled>주요 연결 10개</button>
+          <button class="filter-button" type="button" data-selection-limit="all" disabled>전체</button>
+        </div>
+        <p class="selection-help">공격 비용이 낮고 성공 확률이 높은 연결부터 표시합니다.</p>
       </div>
       <p class="mode-status" id="mode-status" aria-live="polite">GAT 위험도 반영 경로 보기</p>
       <p class="complexity-notice" id="complexity-notice" hidden></p>
     </div>
     <div class="legend" aria-label="그래프 범례">
+      <span class="legend-group"><span class="legend-label">장비</span><span><span class="device-swatch" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="12" rx="2" fill="#59627d"/><rect x="5" y="8" width="14" height="6" rx="1" fill="none" stroke="white" stroke-width="1.5"/><path d="M9 20h6M12 17v3" stroke="white" stroke-width="1.5"/></svg></span>모니터 = workstation</span><span><span class="device-swatch" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="3" fill="#59627d"/><path d="M6 12h12M8 9l-2 3 2 3M16 9l2 3-2 3" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>라우터 = gateway</span></span>
       <span class="legend-group"><span class="legend-label">위험도</span><span><span class="dot" style="background:#2ecc71"></span>낮음</span><span><span class="dot" style="background:#f1c40f"></span>중간</span><span><span class="dot" style="background:#e74c3c"></span>높음</span></span>
-      <span class="legend-group"><span class="legend-label">상태</span><span><span class="border-swatch" style="border-color:#fff"></span>경로</span><span><span class="border-swatch" style="border-color:#63c8ff"></span>선택</span></span>
+      <span class="legend-group"><span class="legend-label">상태</span><span><span class="border-swatch" style="border-color:#fff"></span>경로 외곽</span><span><span class="border-swatch" style="border-color:#63c8ff"></span>선택 내부</span></span>
       <span class="legend-group"><span class="legend-label">경로선</span><span><span class="line-swatch" style="background:#4da3ff"></span>기본</span><span><span class="line-swatch" style="background:#ff8a65"></span>GAT 반영</span><span><span class="line-swatch" style="background:#fff"></span>공통</span></span>
+      <span class="legend-group"><span class="legend-label">선택 연결</span><span><span class="line-swatch" style="background:#55d6be"></span>들어옴</span><span><span class="line-swatch" style="background:#9b8cff"></span>나감</span></span>
     </div>
     <div class="path-summary" aria-label="경로 비교">
       <span class="path-label original">기본 최단 경로</span><span id="original-path-text">-</span>
@@ -224,8 +251,11 @@
 <script>
 const ui = {
   graphMode: 'gat', selectedNodeId: null, selectionEdgesVisible: true,
+  allLabelsVisible: false, hoveredNodeId: null, searchedNodeId: null,
+  selectionDirection: 'both', selectionLimit: 5,
   graph: null, analysis: null, network: null, nodes: null, edges: null, edgeRecords: [],
 };
+const nodeImageCache = new Map();
 const elements = {
   loading: document.getElementById('loading-state'), error: document.getElementById('error-state'),
   errorMessage: document.getElementById('error-message'), panelContent: document.getElementById('panel-content'),
@@ -233,6 +263,7 @@ const elements = {
   searchInput: document.getElementById('node-search'), searchMessage: document.getElementById('search-message'),
   modeStatus: document.getElementById('mode-status'), complexityNotice: document.getElementById('complexity-notice'),
   selectionOverlayButton: document.getElementById('selection-overlay-button'),
+  allLabelsButton: document.getElementById('all-labels-button'),
 };
 function escapeHtml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
@@ -255,16 +286,61 @@ function activePathNodes() {
   if (ui.graphMode === 'compare') return new Set([...ui.analysis.original_path, ...ui.analysis.attack_path].map(String));
   return new Set(ui.analysis.attack_path.map(String));
 }
-function nodeVisual(node) {
+function svgDataUri(svg) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+const fallbackNodeImage = svgDataUri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="21" fill="#59627d" stroke="#ffffff" stroke-width="2"/></svg>');
+function nodeIconImage(type, risk, onPath, selected) {
+  const riskBand = risk >= 0.7 ? 'high' : risk >= 0.3 ? 'medium' : 'low';
+  const key = `${type}|${riskBand}|${onPath}|${selected}`;
+  if (nodeImageCache.has(key)) return nodeImageCache.get(key);
+  const fill = riskColor(risk);
+  const outerRing = onPath ? '<circle cx="32" cy="32" r="28" fill="none" stroke="#fff" stroke-width="4"/>' : '';
+  const selectionRadius = onPath ? 23 : 27;
+  const selectionRing = selected ? `<circle cx="32" cy="32" r="${selectionRadius}" fill="none" stroke="#63c8ff" stroke-width="3"/>` : '';
+  const glyph = type === 'gateway'
+    ? `<rect x="14" y="24" width="36" height="17" rx="5" fill="${fill}" stroke="#11182a" stroke-width="2"/><path d="M20 32.5h24M23 27l-5 5.5 5 5.5M41 27l5 5.5-5 5.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`
+    : `<circle cx="32" cy="32" r="20" fill="${fill}" stroke="#11182a" stroke-width="2"/><rect x="19" y="21" width="26" height="18" rx="2.5" fill="none" stroke="#fff" stroke-width="3"/><path d="M27 45h10M32 39v6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;
+  const image = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${outerRing}${selectionRing}${glyph}</svg>`);
+  nodeImageCache.set(key, image);
+  return image;
+}
+function nodeVisual(node, selection = selectionContext()) {
   const nodeId = String(node.id), selected = nodeId === ui.selectedNodeId;
   const onPath = activePathNodes().has(nodeId), risk = ui.analysis.risk_scores[nodeId] ?? 0;
+  const showLabel = ui.allLabelsVisible || node.zone === 'gateway' || onPath || selected || nodeId === ui.searchedNodeId || nodeId === ui.hoveredNodeId;
+  const label = showLabel ? (node.zone === 'gateway' ? `GW ${nodeId}` : nodeId) : '';
+  const opacity = ui.selectedNodeId === null || !ui.selectionEdgesVisible || ui.graphMode === 'all' || selection.relatedNodeIds.has(nodeId) ? 1 : 0.2;
   return {
-    id: nodeId, shape: node.zone === 'gateway' ? 'hexagon' : 'dot', size: node.zone === 'gateway' ? 18 : 13,
-    color: { background: riskColor(risk), border: selected ? '#63c8ff' : onPath ? '#ffffff' : '#555d78',
-      highlight: { background: riskColor(risk), border: '#63c8ff' } },
-    borderWidth: selected ? 2 : onPath ? 3 : 1,
-    borderWidthSelected: 2,
+    id: nodeId, shape: 'image', image: nodeIconImage(node.zone, risk, onPath, selected), brokenImage: fallbackNodeImage,
+    size: node.zone === 'gateway' ? 27 : 24, borderWidth: 0, borderWidthSelected: 0,
+    shapeProperties: { useBorderWithImage: false, interpolation: true },
+    label,
+    title: `ID: ${escapeHtml(nodeId)}<br>유형: ${escapeHtml(node.zone)}<br>위험도: ${escapeHtml(Number(risk).toFixed(4))}`,
+    font: { color: selected ? '#b8eaff' : '#fff', size: selected ? 14 : 12, strokeWidth: selected ? 3 : 2, strokeColor: 'rgba(17,21,40,0.9)', vadjust: 4 },
+    opacity,
   };
+}
+function selectionContext() {
+  const relatedNodeIds = new Set(activePathNodes());
+  if (ui.selectedNodeId === null) return { edgeIds: new Set(), relatedNodeIds, edges: [] };
+  const selectedId = ui.selectedNodeId;
+  relatedNodeIds.add(selectedId);
+  if (!ui.selectionEdgesVisible) return { edgeIds: new Set(), relatedNodeIds, edges: [] };
+  const rank = edges => edges.sort((left, right) => left.attackCost - right.attackCost || right.successProb - left.successProb || left.index - right.index);
+  const limit = edges => ui.selectionLimit === 'all' ? edges : edges.slice(0, ui.selectionLimit);
+  const incoming = rank(ui.edgeRecords.filter(edge => edge.target === selectedId));
+  const outgoing = rank(ui.edgeRecords.filter(edge => edge.source === selectedId));
+  let edges;
+  if (ui.selectionDirection === 'incoming') edges = limit(incoming);
+  else if (ui.selectionDirection === 'outgoing') edges = limit(outgoing);
+  else {
+    const combined = [...limit(incoming), ...limit(outgoing)];
+    edges = [...new Map(combined.map(edge => [edge.id, edge])).values()];
+  }
+  const edgeIds = new Set(edges.map(edge => edge.id));
+  edges.forEach(edge => { relatedNodeIds.add(edge.source); relatedNodeIds.add(edge.target); });
+  return { edgeIds, relatedNodeIds, edges };
 }
 function baseEdgeVisual(edge) {
   if (ui.graphMode === 'all') return { hidden: false, color: { color: edge.onGatPath ? '#ff8a65' : 'rgba(120,130,165,0.16)' }, width: edge.onGatPath ? 3 : 0.6 };
@@ -276,21 +352,32 @@ function baseEdgeVisual(edge) {
   }
   return { hidden: !edge.onGatPath, color: { color: '#ff8a65' }, width: 3 };
 }
-function edgeVisual(edge) {
-  const connected = ui.selectedNodeId !== null && (edge.source === ui.selectedNodeId || edge.target === ui.selectedNodeId);
-  if (ui.selectionEdgesVisible && connected) return { hidden: false, color: { color: '#63c8ff' }, width: 2.5 };
+function edgeVisual(edge, selection = selectionContext()) {
+  if (ui.selectedNodeId !== null && ui.selectionEdgesVisible) {
+    if (edge.onGatPath) return { hidden: false, color: { color: '#ff8a65' }, width: 3 };
+    if (selection.edgeIds.has(edge.id)) {
+      const outgoing = edge.source === ui.selectedNodeId;
+      return { hidden: false, color: { color: outgoing ? '#9b8cff' : '#55d6be' }, width: 2.4 };
+    }
+    return { hidden: true, color: { color: 'transparent' }, width: 0 };
+  }
   return baseEdgeVisual(edge);
 }
 function updateGraphVisuals() {
   if (!ui.network) return;
-  ui.nodes.update(ui.graph.nodes.map(node => nodeVisual(node)));
-  ui.edges.update(ui.edgeRecords.map(edge => ({ id: edge.id, ...edgeVisual(edge) })));
+  const selection = selectionContext();
+  ui.nodes.update(ui.graph.nodes.map(node => nodeVisual(node, selection)));
+  ui.edges.update(ui.edgeRecords.map(edge => ({ id: edge.id, ...edgeVisual(edge, selection) })));
 }
 function modeLabel(mode) {
   return { original: '기본 최단 경로 보기', gat: 'GAT 위험도 반영 경로 보기', compare: '두 경로 비교 보기', all: '전체 네트워크 보기' }[mode];
 }
 function setGraphMode(mode) {
   ui.graphMode = mode;
+  if (mode === 'all') {
+    ui.selectionEdgesVisible = false;
+    resetSelectionFilters();
+  }
   document.querySelectorAll('[data-graph-mode]').forEach(button => {
     const active = button.dataset.graphMode === mode;
     button.classList.toggle('active', active);
@@ -298,10 +385,24 @@ function setGraphMode(mode) {
   });
   elements.modeStatus.textContent = modeLabel(mode);
   elements.complexityNotice.hidden = mode !== 'all';
+  syncSelectionControls();
   updateGraphVisuals();
+  if (ui.selectedNodeId !== null) renderSelectedNode(ui.selectedNodeId);
 }
 function actionList(actions) {
   return `<ul>${actions.map(action => `<li>${escapeHtml(action)}</li>`).join('')}</ul>`;
+}
+function connectionSummary(nodeId) {
+  const incoming = ui.edgeRecords.filter(edge => edge.target === nodeId).length;
+  const outgoing = ui.edgeRecords.filter(edge => edge.source === nodeId).length;
+  const shown = selectionContext().edges.length;
+  const directionLabel = { incoming: '공격 유입', outgoing: '공격 이동', both: '양방향' }[ui.selectionDirection];
+  const limitLabel = ui.selectionLimit === 'all' ? '전체' : `주요 연결 ${ui.selectionLimit}개${ui.selectionDirection === 'both' ? ' (방향별)' : ''}`;
+  const warning = ui.selectionLimit === 'all' ? '<p class="complexity-notice">전체 직접 연결을 표시하면 그래프가 복잡해질 수 있습니다.</p>' : '';
+  return `<h4>잠재적 연결 표시</h4><dl class="detail-grid">
+    <dt>들어오는 연결</dt><dd>${incoming}개</dd><dt>나가는 연결</dt><dd>${outgoing}개</dd>
+    <dt>현재 표시</dt><dd>${shown}개</dd><dt>선택 기준</dt><dd>${escapeHtml(directionLabel)}, ${escapeHtml(limitLabel)} — attack_cost 오름차순, 동일 비용은 success_prob 내림차순</dd>
+  </dl>${warning}`;
 }
 function renderSelectedNode(nodeId) {
   const node = ui.graph.nodes.find(item => String(item.id) === nodeId);
@@ -311,7 +412,7 @@ function renderSelectedNode(nodeId) {
     <dt>ID</dt><dd>${escapeHtml(nodeId)}</dd><dt>유형</dt><dd>${escapeHtml(node?.zone ?? '알 수 없음')}</dd>
     <dt>위험도</dt><dd>${escapeHtml(Number(risk).toFixed(4))}</dd><dt>CVE</dt><dd>${escapeHtml(node?.cve ?? '없음')}</dd>
     <dt>CWE</dt><dd>${escapeHtml(node?.cwe ?? '없음')}</dd></dl>
-    <div class="node-meta"><span class="meta-chip">GAT 위험도 반영 경로: ${onPath ? '포함' : '미포함'}</span></div>`;
+    <div class="node-meta"><span class="meta-chip">GAT 위험도 반영 경로: ${onPath ? '포함' : '미포함'}</span></div>${connectionSummary(nodeId)}`;
   if (!strategy || strategy.status === 'not_generated' || !strategy.summary) {
     elements.panelContent.innerHTML = `<h3>노드 ${escapeHtml(nodeId)}</h3>${details}<h4>방어전략</h4><p>사전 생성된 방어전략이 없습니다</p>`;
     return;
@@ -325,6 +426,8 @@ function renderSelectedNode(nodeId) {
 }
 function selectNode(nodeId, focus = false) {
   ui.selectedNodeId = String(nodeId);
+  if (ui.graphMode !== 'all') ui.selectionEdgesVisible = true;
+  syncSelectionControls();
   elements.clearSelection.disabled = false;
   elements.searchMessage.textContent = '';
   renderSelectedNode(ui.selectedNodeId);
@@ -332,9 +435,35 @@ function selectNode(nodeId, focus = false) {
   ui.network.selectNodes([ui.selectedNodeId], false);
   if (focus) ui.network.focus(ui.selectedNodeId, { scale: 1.25, animation: { duration: 450, easingFunction: 'easeInOutQuad' } });
 }
+function refreshSelectionView() {
+  updateGraphVisuals();
+  if (ui.selectedNodeId !== null) renderSelectedNode(ui.selectedNodeId);
+}
+function resetSelectionFilters() {
+  ui.selectionDirection = 'both';
+  ui.selectionLimit = 5;
+}
+function syncSelectionControls() {
+  const disabled = ui.selectedNodeId === null || !ui.selectionEdgesVisible || ui.graphMode === 'all';
+  document.querySelectorAll('[data-selection-direction]').forEach(button => {
+    const active = button.dataset.selectionDirection === ui.selectionDirection;
+    button.disabled = disabled; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+  });
+  document.querySelectorAll('[data-selection-limit]').forEach(button => {
+    const active = String(button.dataset.selectionLimit) === String(ui.selectionLimit);
+    button.disabled = disabled; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active));
+  });
+  elements.selectionOverlayButton.disabled = ui.graphMode === 'all' || ui.selectedNodeId === null;
+  elements.selectionOverlayButton.classList.toggle('overlay-active', ui.selectionEdgesVisible && ui.graphMode !== 'all');
+  elements.selectionOverlayButton.setAttribute('aria-pressed', String(ui.selectionEdgesVisible && ui.graphMode !== 'all'));
+}
 function clearSelection() {
   if (!ui.network) return;
   ui.selectedNodeId = null;
+  ui.searchedNodeId = null;
+  resetSelectionFilters();
+  ui.selectionEdgesVisible = ui.graphMode !== 'all';
+  syncSelectionControls();
   elements.clearSelection.disabled = true;
   elements.panelContent.innerHTML = '<p class="empty-state">노드를 클릭하거나 ID를 검색하면 상세정보와 방어전략이 표시됩니다.</p>';
   ui.network.unselectAll();
@@ -349,8 +478,29 @@ function initializeControls() {
   document.querySelectorAll('[data-graph-mode]').forEach(button => button.addEventListener('click', () => setGraphMode(button.dataset.graphMode)));
   elements.selectionOverlayButton.addEventListener('click', () => {
     ui.selectionEdgesVisible = !ui.selectionEdgesVisible;
-    elements.selectionOverlayButton.classList.toggle('overlay-active', ui.selectionEdgesVisible);
-    elements.selectionOverlayButton.setAttribute('aria-pressed', String(ui.selectionEdgesVisible));
+    syncSelectionControls();
+    refreshSelectionView();
+  });
+  document.querySelectorAll('[data-selection-direction]').forEach(button => button.addEventListener('click', () => {
+    ui.selectionDirection = button.dataset.selectionDirection;
+    document.querySelectorAll('[data-selection-direction]').forEach(item => {
+      const active = item.dataset.selectionDirection === ui.selectionDirection;
+      item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active));
+    });
+    refreshSelectionView();
+  }));
+  document.querySelectorAll('[data-selection-limit]').forEach(button => button.addEventListener('click', () => {
+    ui.selectionLimit = button.dataset.selectionLimit === 'all' ? 'all' : Number(button.dataset.selectionLimit);
+    document.querySelectorAll('[data-selection-limit]').forEach(item => {
+      const active = String(item.dataset.selectionLimit) === String(ui.selectionLimit);
+      item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active));
+    });
+    refreshSelectionView();
+  }));
+  elements.allLabelsButton.addEventListener('click', () => {
+    ui.allLabelsVisible = !ui.allLabelsVisible;
+    elements.allLabelsButton.classList.toggle('active', ui.allLabelsVisible);
+    elements.allLabelsButton.setAttribute('aria-pressed', String(ui.allLabelsVisible));
     updateGraphVisuals();
   });
   elements.clearSelection.addEventListener('click', clearSelection);
@@ -362,6 +512,7 @@ function initializeControls() {
       elements.searchMessage.textContent = query ? `노드 ${query}을(를) 찾을 수 없습니다.` : '검색할 노드 ID를 입력해주세요.';
       return;
     }
+    ui.searchedNodeId = query;
     selectNode(query, true);
     elements.searchMessage.textContent = `노드 ${query}을(를) 선택했습니다.`;
   });
@@ -388,10 +539,14 @@ async function main() {
     const originalEdges = pathEdges(analysis.original_path), gatEdges = pathEdges(analysis.attack_path);
     ui.edgeRecords = graph.edges.map((edge, index) => {
       const source = String(edge.source), target = String(edge.target), key = `${source}->${target}`;
-      return { id: `edge-${index}`, source, target, onOriginalPath: originalEdges.has(key), onGatPath: gatEdges.has(key) };
+      return {
+        id: `edge-${index}`, index, source, target,
+        attackCost: Number(edge.attack_cost ?? Number.POSITIVE_INFINITY), successProb: Number(edge.success_prob ?? 0),
+        onOriginalPath: originalEdges.has(key), onGatPath: gatEdges.has(key),
+      };
     });
     ui.nodes = new vis.DataSet(graph.nodes.map(node => ({
-      id: String(node.id), label: String(node.id), font: { color: '#fff', size: 12 }, ...nodeVisual(node),
+      id: String(node.id), ...nodeVisual(node),
     })));
     ui.edges = new vis.DataSet(ui.edgeRecords.map(edge => ({
       id: edge.id, from: edge.source, to: edge.target, arrows: 'to', ...edgeVisual(edge),
@@ -402,6 +557,14 @@ async function main() {
       interaction: { zoomView: true, dragView: true, hover: true },
     });
     ui.network.on('click', params => params.nodes.length > 0 ? selectNode(String(params.nodes[0])) : clearSelection());
+    ui.network.on('hoverNode', params => {
+      ui.hoveredNodeId = String(params.node);
+      updateGraphVisuals();
+    });
+    ui.network.on('blurNode', () => {
+      ui.hoveredNodeId = null;
+      updateGraphVisuals();
+    });
     elements.loading.hidden = true;
     setGraphMode('gat');
   } catch (error) { showError(error); }
