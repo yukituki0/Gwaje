@@ -1,0 +1,31 @@
+﻿diff --git a/config.py b/config.py
+index 8d9ea06..0413eea 100644
+--- a/config.py
++++ b/config.py
+@@ -10,16 +10,16 @@ num_cores = 3
+ GATEWAYS=['Netgear Nighthawk','Cisco ISR','Netgear CAX80','Google Nest','Ubiquiti EdgeRouter','MikroTik','Fortinet']
+ OS=['Windows 10','Ubuntu Linux 22.10', 'Debian Linux 11']
+ SERVICES=['MySQL','PostgreSQL','Neo4','Azure','AWS','Apache','HTTP Web Server','nginx']
+-nhosts = [5,10,25,50,75,100,150,250,500]
+-nvulns = [5,10,25,50,75,100,150,250,500]
+-topologies = ['mesh','random','star','ring','tree','powerlaw','lan0','lan25','lan50']
+-distro = ['uniform','poisson','bernoulli','binomial']
+-diversity = [0,0.25,0.5,0.75,1]
+-# nhosts = [5,10,50]
+-# nvulns = [5,10,20]
+-# topologies = ['powerlaw',"lan25","star"]
+-# distro = ['uniform']
+-# diversity = [0.25,1]
++#nhosts = [5,10,25,50,75,100,150,250,500]
++#nvulns = [5,10,25,50,75,100,150,250,500]
++#topologies = ['mesh','random','star','ring','tree','powerlaw','lan0','lan25','lan50']
++#distro = ['uniform','poisson','bernoulli','binomial']
++#diversity = [0,0.25,0.5,0.75,1]
++nhosts = [5,10,50]
++nvulns = [5,10,20]
++topologies = ['powerlaw',"lan25","star"]
++distro = ['uniform']
++diversity = [0.25,1]
+ 
+ ### [AttackGraph]
+ timeout = 7000

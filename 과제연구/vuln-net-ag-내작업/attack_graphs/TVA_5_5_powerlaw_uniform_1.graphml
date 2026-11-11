@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d1" for="node" attr.name="color" attr.type="string" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="guest@0">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@2">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2008-4927">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2009-4309">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2010-3138">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2007-3037">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2010-2745">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@2">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@0">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-12513">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12511">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2020-28041">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12510">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12512">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="root@0">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@3">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2023-2612">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@3">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2023-1786">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="user@3">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2023-1523">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2023-3297">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2023-5536">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="user@4">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2014-1646">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2014-1647">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2014-3436">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2014-3431">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2013-1610">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@4">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="guest@1">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@1">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-9511">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-9512">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-9513">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-9514">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2017-9525">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="root@2">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@4">
+      <data key="d0">privilege</data>
+      <data key="d1">green</data>
+    </node>
+    <edge source="guest@0" target="CVE-2008-4927" />
+    <edge source="guest@0" target="CVE-2009-4309" />
+    <edge source="guest@0" target="CVE-2010-3138" />
+    <edge source="guest@0" target="CVE-2007-3037" />
+    <edge source="guest@0" target="CVE-2010-2745" />
+    <edge source="guest@0" target="CVE-2023-1786" />
+    <edge source="guest@0" target="CVE-2023-1523" />
+    <edge source="guest@0" target="CVE-2023-3297" />
+    <edge source="guest@0" target="CVE-2014-1646" />
+    <edge source="guest@0" target="CVE-2014-1647" />
+    <edge source="guest@0" target="CVE-2014-3436" />
+    <edge source="CVE-2008-4927" target="user@2" />
+    <edge source="CVE-2009-4309" target="user@2" />
+    <edge source="CVE-2010-3138" target="user@2" />
+    <edge source="CVE-2007-3037" target="user@2" />
+    <edge source="CVE-2010-2745" target="user@2" />
+    <edge source="guest@2" target="CVE-2019-12513" />
+    <edge source="guest@2" target="CVE-2019-12511" />
+    <edge source="guest@2" target="CVE-2020-28041" />
+    <edge source="guest@2" target="CVE-2019-12510" />
+    <edge source="guest@2" target="CVE-2019-12512" />
+    <edge source="guest@2" target="CVE-2019-9511" />
+    <edge source="guest@2" target="CVE-2019-9512" />
+    <edge source="guest@2" target="CVE-2019-9513" />
+    <edge source="guest@2" target="CVE-2019-9514" />
+    <edge source="guest@2" target="CVE-2017-9525" />
+    <edge source="guest@2" target="CVE-2023-1786" />
+    <edge source="guest@2" target="CVE-2023-1523" />
+    <edge source="guest@2" target="CVE-2023-3297" />
+    <edge source="user@0" target="CVE-2014-3431" />
+    <edge source="user@0" target="CVE-2013-1610" />
+    <edge source="CVE-2019-12513" target="user@0" />
+    <edge source="CVE-2019-12511" target="user@0" />
+    <edge source="CVE-2020-28041" target="user@0" />
+    <edge source="CVE-2019-12510" target="user@0" />
+    <edge source="CVE-2019-12512" target="user@0" />
+    <edge source="root@0" target="CVE-2023-2612" />
+    <edge source="root@0" target="CVE-2023-5536" />
+    <edge source="CVE-2023-2612" target="root@3" />
+    <edge source="guest@3" target="CVE-2019-12513" />
+    <edge source="guest@3" target="CVE-2019-12511" />
+    <edge source="guest@3" target="CVE-2020-28041" />
+    <edge source="guest@3" target="CVE-2019-12510" />
+    <edge source="guest@3" target="CVE-2019-12512" />
+    <edge source="guest@3" target="CVE-2008-4927" />
+    <edge source="guest@3" target="CVE-2009-4309" />
+    <edge source="guest@3" target="CVE-2010-3138" />
+    <edge source="guest@3" target="CVE-2007-3037" />
+    <edge source="guest@3" target="CVE-2010-2745" />
+    <edge source="guest@3" target="CVE-2014-1646" />
+    <edge source="guest@3" target="CVE-2014-1647" />
+    <edge source="guest@3" target="CVE-2014-3436" />
+    <edge source="CVE-2023-1786" target="guest@3" />
+    <edge source="user@3" target="CVE-2014-3431" />
+    <edge source="user@3" target="CVE-2013-1610" />
+    <edge source="CVE-2023-1523" target="user@3" />
+    <edge source="CVE-2023-3297" target="user@3" />
+    <edge source="CVE-2023-5536" target="user@3" />
+    <edge source="CVE-2014-1646" target="user@4" />
+    <edge source="CVE-2014-1647" target="user@4" />
+    <edge source="CVE-2014-3436" target="user@4" />
+    <edge source="CVE-2014-3431" target="user@4" />
+    <edge source="CVE-2013-1610" target="user@4" />
+    <edge source="guest@4" target="CVE-2019-12513" />
+    <edge source="guest@4" target="CVE-2019-12511" />
+    <edge source="guest@4" target="CVE-2020-28041" />
+    <edge source="guest@4" target="CVE-2019-12510" />
+    <edge source="guest@4" target="CVE-2019-12512" />
+    <edge source="guest@4" target="CVE-2023-1786" />
+    <edge source="guest@4" target="CVE-2023-1523" />
+    <edge source="guest@4" target="CVE-2023-3297" />
+    <edge source="guest@1" target="CVE-2008-4927" />
+    <edge source="guest@1" target="CVE-2009-4309" />
+    <edge source="guest@1" target="CVE-2010-3138" />
+    <edge source="guest@1" target="CVE-2007-3037" />
+    <edge source="guest@1" target="CVE-2010-2745" />
+    <edge source="CVE-2019-9511" target="user@1" />
+    <edge source="CVE-2019-9512" target="user@1" />
+    <edge source="CVE-2019-9513" target="user@1" />
+    <edge source="CVE-2019-9514" target="user@1" />
+    <edge source="CVE-2017-9525" target="user@1" />
+    <edge source="root@2" target="CVE-2023-2612" />
+    <edge source="root@2" target="CVE-2023-5536" />
+    <edge source="root@4" target="CVE-2023-2612" />
+    <edge source="root@4" target="CVE-2023-5536" />
+  </graph>
+</graphml>

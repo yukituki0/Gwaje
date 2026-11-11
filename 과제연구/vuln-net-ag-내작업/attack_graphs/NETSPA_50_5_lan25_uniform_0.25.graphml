@@ -1,0 +1,1442 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d1" for="node" attr.name="color" attr.type="string" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="guest@12">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@0">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="NONE">
+      <data key="d0">prerequisite</data>
+      <data key="d1">red</data>
+    </node>
+    <node id="CVE-2008-5745">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="root@0">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2006-0006">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2008-4927">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2005-1574">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2006-0025">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@0">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@12">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-12513">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12511">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2020-28041">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12510">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12512">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="user@1">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@1">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@12">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="LOCAL">
+      <data key="d0">prerequisite</data>
+      <data key="d1">red</data>
+    </node>
+    <node id="CVE-2023-1032">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@1">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@2">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@2">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2014-3436">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@2">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@3">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@3">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2006-7236">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@3">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@4">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@4">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2013-4818">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@4">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@5">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@5">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="SINGLE">
+      <data key="d0">prerequisite</data>
+      <data key="d1">red</data>
+    </node>
+    <node id="CVE-2007-2835">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@5">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@6">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@6">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2011-2592">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@6">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@7">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@7">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-5795">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@7">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@8">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@8">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2015-6409">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@8">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@9">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@9">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-6418">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@9">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@10">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@10">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2020-3155">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@10">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@11">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@11">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2008-0931">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@11">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@24">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@24">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2021-1469">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@24">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@25">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@25">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2008-4553">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@25">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@26">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@26">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2021-1411">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@26">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@27">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@27">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2009-1573">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@27">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@28">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@28">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2021-1418">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@28">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@29">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@29">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2011-1400">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@29">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@30">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@30">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2005-1272">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@30">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@31">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@31">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2012-2251">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@31">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@32">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@32">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2006-5143">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@32">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@33">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@33">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2012-5519">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@33">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@34">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@34">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2006-5172">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@34">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@35">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@35">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2013-6475">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@35">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@36">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@36">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-0168">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@36">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@37">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@37">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2014-0462">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@37">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@38">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@38">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-2863">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@38">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@39">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@39">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2013-1427">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@39">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@40">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@40">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-3875">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@40">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@41">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@41">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2015-3332">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@41">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@42">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@42">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-5326">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@42">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@43">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@43">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-15142">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@43">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@44">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@44">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-5328">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@44">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@45">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@45">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-15144">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@45">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@46">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@46">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-5330">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@46">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@47">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@47">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-18804">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@47">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@48">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@48">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2007-5332">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@48">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@49">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@49">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2013-7325">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@49">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@13">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-1649">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2020-3465">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2019-12646">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="CVE-2018-0163">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@13">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="ADJACENT_NETWORK">
+      <data key="d0">prerequisite</data>
+      <data key="d1">red</data>
+    </node>
+    <node id="CVE-2022-47208">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="user@14">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@14">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2009-4309">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@14">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@15">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@15">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2019-9518">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@15">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@16">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@16">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2010-3138">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@16">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@17">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@17">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="guest@17">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2023-1786">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="user@18">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@18">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2006-6134">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@18">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@19">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@19">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="NETWORK">
+      <data key="d0">prerequisite</data>
+      <data key="d1">red</data>
+    </node>
+    <node id="CVE-2023-1523">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@19">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@20">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@20">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2012-4351">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@20">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@21">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@21">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2023-5536">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@21">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@22">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@22">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2013-1610">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@22">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="user@23">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@23">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="CVE-2022-3328">
+      <data key="d0">vulnerability</data>
+      <data key="d1">blue</data>
+    </node>
+    <node id="guest@23">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <node id="root@13">
+      <data key="d0">state</data>
+      <data key="d1">green</data>
+    </node>
+    <edge source="guest@12" target="NONE" />
+    <edge source="guest@12" target="ADJACENT_NETWORK" />
+    <edge source="guest@12" target="LOCAL" />
+    <edge source="guest@12" target="NETWORK" />
+    <edge source="user@0" target="SINGLE" />
+    <edge source="NONE" target="CVE-2008-5745" />
+    <edge source="NONE" target="CVE-2006-0006" />
+    <edge source="NONE" target="CVE-2008-4927" />
+    <edge source="NONE" target="CVE-2005-1574" />
+    <edge source="NONE" target="CVE-2006-0025" />
+    <edge source="NONE" target="CVE-2019-12513" />
+    <edge source="NONE" target="CVE-2019-12511" />
+    <edge source="NONE" target="CVE-2020-28041" />
+    <edge source="NONE" target="CVE-2019-12510" />
+    <edge source="NONE" target="CVE-2019-12512" />
+    <edge source="NONE" target="CVE-2014-3436" />
+    <edge source="NONE" target="CVE-2006-7236" />
+    <edge source="NONE" target="CVE-2013-4818" />
+    <edge source="NONE" target="CVE-2011-2592" />
+    <edge source="NONE" target="CVE-2007-5795" />
+    <edge source="NONE" target="CVE-2015-6409" />
+    <edge source="NONE" target="CVE-2007-6418" />
+    <edge source="NONE" target="CVE-2020-3155" />
+    <edge source="NONE" target="CVE-2008-0931" />
+    <edge source="NONE" target="CVE-2008-4553" />
+    <edge source="NONE" target="CVE-2009-1573" />
+    <edge source="NONE" target="CVE-2011-1400" />
+    <edge source="NONE" target="CVE-2005-1272" />
+    <edge source="NONE" target="CVE-2012-2251" />
+    <edge source="NONE" target="CVE-2006-5143" />
+    <edge source="NONE" target="CVE-2012-5519" />
+    <edge source="NONE" target="CVE-2006-5172" />
+    <edge source="NONE" target="CVE-2013-6475" />
+    <edge source="NONE" target="CVE-2007-0168" />
+    <edge source="NONE" target="CVE-2014-0462" />
+    <edge source="NONE" target="CVE-2007-2863" />
+    <edge source="NONE" target="CVE-2013-1427" />
+    <edge source="NONE" target="CVE-2007-3875" />
+    <edge source="NONE" target="CVE-2015-3332" />
+    <edge source="NONE" target="CVE-2007-5326" />
+    <edge source="NONE" target="CVE-2019-15142" />
+    <edge source="NONE" target="CVE-2007-5328" />
+    <edge source="NONE" target="CVE-2019-15144" />
+    <edge source="NONE" target="CVE-2007-5330" />
+    <edge source="NONE" target="CVE-2019-18804" />
+    <edge source="NONE" target="CVE-2007-5332" />
+    <edge source="NONE" target="CVE-2019-1649" />
+    <edge source="NONE" target="CVE-2020-3465" />
+    <edge source="NONE" target="CVE-2019-12646" />
+    <edge source="NONE" target="CVE-2018-0163" />
+    <edge source="NONE" target="CVE-2009-4309" />
+    <edge source="NONE" target="CVE-2019-9518" />
+    <edge source="NONE" target="CVE-2010-3138" />
+    <edge source="NONE" target="CVE-2006-6134" />
+    <edge source="NONE" target="CVE-2012-4351" />
+    <edge source="CVE-2008-5745" target="user@0" />
+    <edge source="CVE-2008-5745" target="user@1" />
+    <edge source="CVE-2008-5745" target="user@2" />
+    <edge source="CVE-2008-5745" target="user@3" />
+    <edge source="CVE-2008-5745" target="user@4" />
+    <edge source="CVE-2008-5745" target="user@5" />
+    <edge source="CVE-2008-5745" target="user@6" />
+    <edge source="CVE-2008-5745" target="user@7" />
+    <edge source="CVE-2008-5745" target="user@8" />
+    <edge source="CVE-2008-5745" target="user@9" />
+    <edge source="CVE-2008-5745" target="user@10" />
+    <edge source="CVE-2008-5745" target="user@11" />
+    <edge source="CVE-2008-5745" target="user@24" />
+    <edge source="CVE-2008-5745" target="user@25" />
+    <edge source="CVE-2008-5745" target="user@26" />
+    <edge source="CVE-2008-5745" target="user@27" />
+    <edge source="CVE-2008-5745" target="user@28" />
+    <edge source="CVE-2008-5745" target="user@29" />
+    <edge source="CVE-2008-5745" target="user@30" />
+    <edge source="CVE-2008-5745" target="user@31" />
+    <edge source="CVE-2008-5745" target="user@32" />
+    <edge source="CVE-2008-5745" target="user@33" />
+    <edge source="CVE-2008-5745" target="user@34" />
+    <edge source="CVE-2008-5745" target="user@35" />
+    <edge source="CVE-2008-5745" target="user@36" />
+    <edge source="CVE-2008-5745" target="user@37" />
+    <edge source="CVE-2008-5745" target="user@38" />
+    <edge source="CVE-2008-5745" target="user@39" />
+    <edge source="CVE-2008-5745" target="user@40" />
+    <edge source="CVE-2008-5745" target="user@41" />
+    <edge source="CVE-2008-5745" target="user@42" />
+    <edge source="CVE-2008-5745" target="user@43" />
+    <edge source="CVE-2008-5745" target="user@44" />
+    <edge source="CVE-2008-5745" target="user@45" />
+    <edge source="CVE-2008-5745" target="user@46" />
+    <edge source="CVE-2008-5745" target="user@47" />
+    <edge source="CVE-2008-5745" target="user@48" />
+    <edge source="CVE-2008-5745" target="user@49" />
+    <edge source="CVE-2008-5745" target="user@14" />
+    <edge source="CVE-2008-5745" target="user@15" />
+    <edge source="CVE-2008-5745" target="user@16" />
+    <edge source="CVE-2008-5745" target="user@17" />
+    <edge source="CVE-2008-5745" target="user@18" />
+    <edge source="CVE-2008-5745" target="user@19" />
+    <edge source="CVE-2008-5745" target="user@20" />
+    <edge source="CVE-2008-5745" target="user@21" />
+    <edge source="CVE-2008-5745" target="user@22" />
+    <edge source="CVE-2008-5745" target="user@23" />
+    <edge source="root@0" target="LOCAL" />
+    <edge source="CVE-2006-0006" target="root@0" />
+    <edge source="CVE-2006-0006" target="root@1" />
+    <edge source="CVE-2006-0006" target="root@2" />
+    <edge source="CVE-2006-0006" target="root@3" />
+    <edge source="CVE-2006-0006" target="root@4" />
+    <edge source="CVE-2006-0006" target="root@5" />
+    <edge source="CVE-2006-0006" target="root@6" />
+    <edge source="CVE-2006-0006" target="root@7" />
+    <edge source="CVE-2006-0006" target="root@8" />
+    <edge source="CVE-2006-0006" target="root@9" />
+    <edge source="CVE-2006-0006" target="root@10" />
+    <edge source="CVE-2006-0006" target="root@11" />
+    <edge source="CVE-2006-0006" target="root@24" />
+    <edge source="CVE-2006-0006" target="root@25" />
+    <edge source="CVE-2006-0006" target="root@26" />
+    <edge source="CVE-2006-0006" target="root@27" />
+    <edge source="CVE-2006-0006" target="root@28" />
+    <edge source="CVE-2006-0006" target="root@29" />
+    <edge source="CVE-2006-0006" target="root@30" />
+    <edge source="CVE-2006-0006" target="root@31" />
+    <edge source="CVE-2006-0006" target="root@32" />
+    <edge source="CVE-2006-0006" target="root@33" />
+    <edge source="CVE-2006-0006" target="root@34" />
+    <edge source="CVE-2006-0006" target="root@35" />
+    <edge source="CVE-2006-0006" target="root@36" />
+    <edge source="CVE-2006-0006" target="root@37" />
+    <edge source="CVE-2006-0006" target="root@38" />
+    <edge source="CVE-2006-0006" target="root@39" />
+    <edge source="CVE-2006-0006" target="root@40" />
+    <edge source="CVE-2006-0006" target="root@41" />
+    <edge source="CVE-2006-0006" target="root@42" />
+    <edge source="CVE-2006-0006" target="root@43" />
+    <edge source="CVE-2006-0006" target="root@44" />
+    <edge source="CVE-2006-0006" target="root@45" />
+    <edge source="CVE-2006-0006" target="root@46" />
+    <edge source="CVE-2006-0006" target="root@47" />
+    <edge source="CVE-2006-0006" target="root@48" />
+    <edge source="CVE-2006-0006" target="root@49" />
+    <edge source="CVE-2006-0006" target="root@14" />
+    <edge source="CVE-2006-0006" target="root@15" />
+    <edge source="CVE-2006-0006" target="root@16" />
+    <edge source="CVE-2006-0006" target="root@17" />
+    <edge source="CVE-2006-0006" target="root@18" />
+    <edge source="CVE-2006-0006" target="root@19" />
+    <edge source="CVE-2006-0006" target="root@20" />
+    <edge source="CVE-2006-0006" target="root@21" />
+    <edge source="CVE-2006-0006" target="root@22" />
+    <edge source="CVE-2006-0006" target="root@23" />
+    <edge source="CVE-2008-4927" target="user@0" />
+    <edge source="CVE-2005-1574" target="user@0" />
+    <edge source="CVE-2005-1574" target="user@1" />
+    <edge source="CVE-2005-1574" target="user@2" />
+    <edge source="CVE-2005-1574" target="user@3" />
+    <edge source="CVE-2005-1574" target="user@4" />
+    <edge source="CVE-2005-1574" target="user@5" />
+    <edge source="CVE-2005-1574" target="user@6" />
+    <edge source="CVE-2005-1574" target="user@7" />
+    <edge source="CVE-2005-1574" target="user@8" />
+    <edge source="CVE-2005-1574" target="user@9" />
+    <edge source="CVE-2005-1574" target="user@10" />
+    <edge source="CVE-2005-1574" target="user@11" />
+    <edge source="CVE-2005-1574" target="user@24" />
+    <edge source="CVE-2005-1574" target="user@25" />
+    <edge source="CVE-2005-1574" target="user@26" />
+    <edge source="CVE-2005-1574" target="user@27" />
+    <edge source="CVE-2005-1574" target="user@28" />
+    <edge source="CVE-2005-1574" target="user@29" />
+    <edge source="CVE-2005-1574" target="user@30" />
+    <edge source="CVE-2005-1574" target="user@31" />
+    <edge source="CVE-2005-1574" target="user@32" />
+    <edge source="CVE-2005-1574" target="user@33" />
+    <edge source="CVE-2005-1574" target="user@34" />
+    <edge source="CVE-2005-1574" target="user@35" />
+    <edge source="CVE-2005-1574" target="user@36" />
+    <edge source="CVE-2005-1574" target="user@37" />
+    <edge source="CVE-2005-1574" target="user@38" />
+    <edge source="CVE-2005-1574" target="user@39" />
+    <edge source="CVE-2005-1574" target="user@40" />
+    <edge source="CVE-2005-1574" target="user@41" />
+    <edge source="CVE-2005-1574" target="user@42" />
+    <edge source="CVE-2005-1574" target="user@43" />
+    <edge source="CVE-2005-1574" target="user@44" />
+    <edge source="CVE-2005-1574" target="user@45" />
+    <edge source="CVE-2005-1574" target="user@46" />
+    <edge source="CVE-2005-1574" target="user@47" />
+    <edge source="CVE-2005-1574" target="user@48" />
+    <edge source="CVE-2005-1574" target="user@49" />
+    <edge source="CVE-2005-1574" target="user@14" />
+    <edge source="CVE-2005-1574" target="user@15" />
+    <edge source="CVE-2005-1574" target="user@16" />
+    <edge source="CVE-2005-1574" target="user@17" />
+    <edge source="CVE-2005-1574" target="user@18" />
+    <edge source="CVE-2005-1574" target="user@19" />
+    <edge source="CVE-2005-1574" target="user@20" />
+    <edge source="CVE-2005-1574" target="user@21" />
+    <edge source="CVE-2005-1574" target="user@22" />
+    <edge source="CVE-2005-1574" target="user@23" />
+    <edge source="CVE-2006-0025" target="user@0" />
+    <edge source="CVE-2006-0025" target="user@1" />
+    <edge source="CVE-2006-0025" target="user@2" />
+    <edge source="CVE-2006-0025" target="user@3" />
+    <edge source="CVE-2006-0025" target="user@4" />
+    <edge source="CVE-2006-0025" target="user@5" />
+    <edge source="CVE-2006-0025" target="user@6" />
+    <edge source="CVE-2006-0025" target="user@7" />
+    <edge source="CVE-2006-0025" target="user@8" />
+    <edge source="CVE-2006-0025" target="user@9" />
+    <edge source="CVE-2006-0025" target="user@10" />
+    <edge source="CVE-2006-0025" target="user@11" />
+    <edge source="CVE-2006-0025" target="user@24" />
+    <edge source="CVE-2006-0025" target="user@25" />
+    <edge source="CVE-2006-0025" target="user@26" />
+    <edge source="CVE-2006-0025" target="user@27" />
+    <edge source="CVE-2006-0025" target="user@28" />
+    <edge source="CVE-2006-0025" target="user@29" />
+    <edge source="CVE-2006-0025" target="user@30" />
+    <edge source="CVE-2006-0025" target="user@31" />
+    <edge source="CVE-2006-0025" target="user@32" />
+    <edge source="CVE-2006-0025" target="user@33" />
+    <edge source="CVE-2006-0025" target="user@34" />
+    <edge source="CVE-2006-0025" target="user@35" />
+    <edge source="CVE-2006-0025" target="user@36" />
+    <edge source="CVE-2006-0025" target="user@37" />
+    <edge source="CVE-2006-0025" target="user@38" />
+    <edge source="CVE-2006-0025" target="user@39" />
+    <edge source="CVE-2006-0025" target="user@40" />
+    <edge source="CVE-2006-0025" target="user@41" />
+    <edge source="CVE-2006-0025" target="user@42" />
+    <edge source="CVE-2006-0025" target="user@43" />
+    <edge source="CVE-2006-0025" target="user@44" />
+    <edge source="CVE-2006-0025" target="user@45" />
+    <edge source="CVE-2006-0025" target="user@46" />
+    <edge source="CVE-2006-0025" target="user@47" />
+    <edge source="CVE-2006-0025" target="user@48" />
+    <edge source="CVE-2006-0025" target="user@49" />
+    <edge source="CVE-2006-0025" target="user@14" />
+    <edge source="CVE-2006-0025" target="user@15" />
+    <edge source="CVE-2006-0025" target="user@16" />
+    <edge source="CVE-2006-0025" target="user@17" />
+    <edge source="CVE-2006-0025" target="user@18" />
+    <edge source="CVE-2006-0025" target="user@19" />
+    <edge source="CVE-2006-0025" target="user@20" />
+    <edge source="CVE-2006-0025" target="user@21" />
+    <edge source="CVE-2006-0025" target="user@22" />
+    <edge source="CVE-2006-0025" target="user@23" />
+    <edge source="guest@0" target="NONE" />
+    <edge source="guest@0" target="ADJACENT_NETWORK" />
+    <edge source="guest@0" target="LOCAL" />
+    <edge source="guest@0" target="NETWORK" />
+    <edge source="user@12" target="SINGLE" />
+    <edge source="CVE-2019-12513" target="user@12" />
+    <edge source="CVE-2019-12511" target="user@12" />
+    <edge source="CVE-2020-28041" target="user@12" />
+    <edge source="CVE-2019-12510" target="user@12" />
+    <edge source="CVE-2019-12512" target="user@12" />
+    <edge source="user@1" target="SINGLE" />
+    <edge source="root@1" target="LOCAL" />
+    <edge source="root@12" target="LOCAL" />
+    <edge source="LOCAL" target="CVE-2023-1032" />
+    <edge source="LOCAL" target="CVE-2023-1786" />
+    <edge source="LOCAL" target="CVE-2023-5536" />
+    <edge source="LOCAL" target="CVE-2022-3328" />
+    <edge source="CVE-2023-1032" target="root@1" />
+    <edge source="guest@1" target="NONE" />
+    <edge source="guest@1" target="ADJACENT_NETWORK" />
+    <edge source="guest@1" target="LOCAL" />
+    <edge source="guest@1" target="NETWORK" />
+    <edge source="user@2" target="SINGLE" />
+    <edge source="root@2" target="LOCAL" />
+    <edge source="CVE-2014-3436" target="user@2" />
+    <edge source="guest@2" target="NONE" />
+    <edge source="guest@2" target="ADJACENT_NETWORK" />
+    <edge source="guest@2" target="LOCAL" />
+    <edge source="guest@2" target="NETWORK" />
+    <edge source="user@3" target="SINGLE" />
+    <edge source="root@3" target="LOCAL" />
+    <edge source="CVE-2006-7236" target="root@3" />
+    <edge source="guest@3" target="NONE" />
+    <edge source="guest@3" target="ADJACENT_NETWORK" />
+    <edge source="guest@3" target="LOCAL" />
+    <edge source="guest@3" target="NETWORK" />
+    <edge source="user@4" target="SINGLE" />
+    <edge source="root@4" target="LOCAL" />
+    <edge source="CVE-2013-4818" target="user@4" />
+    <edge source="guest@4" target="NONE" />
+    <edge source="guest@4" target="ADJACENT_NETWORK" />
+    <edge source="guest@4" target="LOCAL" />
+    <edge source="guest@4" target="NETWORK" />
+    <edge source="user@5" target="SINGLE" />
+    <edge source="root@5" target="LOCAL" />
+    <edge source="SINGLE" target="CVE-2007-2835" />
+    <edge source="SINGLE" target="CVE-2021-1469" />
+    <edge source="SINGLE" target="CVE-2021-1411" />
+    <edge source="SINGLE" target="CVE-2021-1418" />
+    <edge source="SINGLE" target="CVE-2013-7325" />
+    <edge source="SINGLE" target="CVE-2013-1610" />
+    <edge source="CVE-2007-2835" target="root@5" />
+    <edge source="guest@5" target="NONE" />
+    <edge source="guest@5" target="ADJACENT_NETWORK" />
+    <edge source="guest@5" target="LOCAL" />
+    <edge source="guest@5" target="NETWORK" />
+    <edge source="user@6" target="SINGLE" />
+    <edge source="root@6" target="LOCAL" />
+    <edge source="CVE-2011-2592" target="user@6" />
+    <edge source="guest@6" target="NONE" />
+    <edge source="guest@6" target="ADJACENT_NETWORK" />
+    <edge source="guest@6" target="LOCAL" />
+    <edge source="guest@6" target="NETWORK" />
+    <edge source="user@7" target="SINGLE" />
+    <edge source="root@7" target="LOCAL" />
+    <edge source="CVE-2007-5795" target="user@7" />
+    <edge source="guest@7" target="NONE" />
+    <edge source="guest@7" target="ADJACENT_NETWORK" />
+    <edge source="guest@7" target="LOCAL" />
+    <edge source="guest@7" target="NETWORK" />
+    <edge source="user@8" target="SINGLE" />
+    <edge source="root@8" target="LOCAL" />
+    <edge source="CVE-2015-6409" target="user@8" />
+    <edge source="guest@8" target="NONE" />
+    <edge source="guest@8" target="ADJACENT_NETWORK" />
+    <edge source="guest@8" target="LOCAL" />
+    <edge source="guest@8" target="NETWORK" />
+    <edge source="user@9" target="SINGLE" />
+    <edge source="root@9" target="LOCAL" />
+    <edge source="CVE-2007-6418" target="user@9" />
+    <edge source="guest@9" target="NONE" />
+    <edge source="guest@9" target="ADJACENT_NETWORK" />
+    <edge source="guest@9" target="LOCAL" />
+    <edge source="guest@9" target="NETWORK" />
+    <edge source="user@10" target="SINGLE" />
+    <edge source="root@10" target="LOCAL" />
+    <edge source="CVE-2020-3155" target="user@10" />
+    <edge source="guest@10" target="NONE" />
+    <edge source="guest@10" target="ADJACENT_NETWORK" />
+    <edge source="guest@10" target="LOCAL" />
+    <edge source="guest@10" target="NETWORK" />
+    <edge source="user@11" target="SINGLE" />
+    <edge source="root@11" target="LOCAL" />
+    <edge source="CVE-2008-0931" target="user@11" />
+    <edge source="guest@11" target="NONE" />
+    <edge source="guest@11" target="ADJACENT_NETWORK" />
+    <edge source="guest@11" target="LOCAL" />
+    <edge source="guest@11" target="NETWORK" />
+    <edge source="user@24" target="SINGLE" />
+    <edge source="root@24" target="LOCAL" />
+    <edge source="CVE-2021-1469" target="user@24" />
+    <edge source="guest@24" target="NONE" />
+    <edge source="guest@24" target="ADJACENT_NETWORK" />
+    <edge source="guest@24" target="LOCAL" />
+    <edge source="guest@24" target="NETWORK" />
+    <edge source="user@25" target="SINGLE" />
+    <edge source="root@25" target="LOCAL" />
+    <edge source="CVE-2008-4553" target="root@25" />
+    <edge source="guest@25" target="NONE" />
+    <edge source="guest@25" target="ADJACENT_NETWORK" />
+    <edge source="guest@25" target="LOCAL" />
+    <edge source="guest@25" target="NETWORK" />
+    <edge source="user@26" target="SINGLE" />
+    <edge source="root@26" target="LOCAL" />
+    <edge source="CVE-2021-1411" target="user@26" />
+    <edge source="guest@26" target="NONE" />
+    <edge source="guest@26" target="ADJACENT_NETWORK" />
+    <edge source="guest@26" target="LOCAL" />
+    <edge source="guest@26" target="NETWORK" />
+    <edge source="user@27" target="SINGLE" />
+    <edge source="root@27" target="LOCAL" />
+    <edge source="CVE-2009-1573" target="user@27" />
+    <edge source="guest@27" target="NONE" />
+    <edge source="guest@27" target="ADJACENT_NETWORK" />
+    <edge source="guest@27" target="LOCAL" />
+    <edge source="guest@27" target="NETWORK" />
+    <edge source="user@28" target="SINGLE" />
+    <edge source="root@28" target="LOCAL" />
+    <edge source="CVE-2021-1418" target="user@28" />
+    <edge source="guest@28" target="NONE" />
+    <edge source="guest@28" target="ADJACENT_NETWORK" />
+    <edge source="guest@28" target="LOCAL" />
+    <edge source="guest@28" target="NETWORK" />
+    <edge source="user@29" target="SINGLE" />
+    <edge source="root@29" target="LOCAL" />
+    <edge source="CVE-2011-1400" target="user@29" />
+    <edge source="guest@29" target="NONE" />
+    <edge source="guest@29" target="ADJACENT_NETWORK" />
+    <edge source="guest@29" target="LOCAL" />
+    <edge source="guest@29" target="NETWORK" />
+    <edge source="user@30" target="SINGLE" />
+    <edge source="root@30" target="LOCAL" />
+    <edge source="CVE-2005-1272" target="user@30" />
+    <edge source="guest@30" target="NONE" />
+    <edge source="guest@30" target="ADJACENT_NETWORK" />
+    <edge source="guest@30" target="LOCAL" />
+    <edge source="guest@30" target="NETWORK" />
+    <edge source="user@31" target="SINGLE" />
+    <edge source="root@31" target="LOCAL" />
+    <edge source="CVE-2012-2251" target="user@31" />
+    <edge source="guest@31" target="NONE" />
+    <edge source="guest@31" target="ADJACENT_NETWORK" />
+    <edge source="guest@31" target="LOCAL" />
+    <edge source="guest@31" target="NETWORK" />
+    <edge source="user@32" target="SINGLE" />
+    <edge source="root@32" target="LOCAL" />
+    <edge source="CVE-2006-5143" target="user@32" />
+    <edge source="guest@32" target="NONE" />
+    <edge source="guest@32" target="ADJACENT_NETWORK" />
+    <edge source="guest@32" target="LOCAL" />
+    <edge source="guest@32" target="NETWORK" />
+    <edge source="user@33" target="SINGLE" />
+    <edge source="root@33" target="LOCAL" />
+    <edge source="CVE-2012-5519" target="user@33" />
+    <edge source="guest@33" target="NONE" />
+    <edge source="guest@33" target="ADJACENT_NETWORK" />
+    <edge source="guest@33" target="LOCAL" />
+    <edge source="guest@33" target="NETWORK" />
+    <edge source="user@34" target="SINGLE" />
+    <edge source="root@34" target="LOCAL" />
+    <edge source="CVE-2006-5172" target="root@34" />
+    <edge source="guest@34" target="NONE" />
+    <edge source="guest@34" target="ADJACENT_NETWORK" />
+    <edge source="guest@34" target="LOCAL" />
+    <edge source="guest@34" target="NETWORK" />
+    <edge source="user@35" target="SINGLE" />
+    <edge source="root@35" target="LOCAL" />
+    <edge source="CVE-2013-6475" target="user@35" />
+    <edge source="guest@35" target="NONE" />
+    <edge source="guest@35" target="ADJACENT_NETWORK" />
+    <edge source="guest@35" target="LOCAL" />
+    <edge source="guest@35" target="NETWORK" />
+    <edge source="user@36" target="SINGLE" />
+    <edge source="CVE-2007-0168" target="user@36" />
+    <edge source="guest@36" target="NONE" />
+    <edge source="guest@36" target="ADJACENT_NETWORK" />
+    <edge source="user@37" target="SINGLE" />
+    <edge source="CVE-2014-0462" target="user@37" />
+    <edge source="guest@37" target="NONE" />
+    <edge source="guest@37" target="ADJACENT_NETWORK" />
+    <edge source="user@38" target="SINGLE" />
+    <edge source="CVE-2007-2863" target="root@38" />
+    <edge source="guest@38" target="NONE" />
+    <edge source="guest@38" target="ADJACENT_NETWORK" />
+    <edge source="user@39" target="SINGLE" />
+    <edge source="CVE-2013-1427" target="user@39" />
+    <edge source="guest@39" target="NONE" />
+    <edge source="guest@39" target="ADJACENT_NETWORK" />
+    <edge source="user@40" target="SINGLE" />
+    <edge source="CVE-2007-3875" target="user@40" />
+    <edge source="guest@40" target="NONE" />
+    <edge source="guest@40" target="ADJACENT_NETWORK" />
+    <edge source="user@41" target="SINGLE" />
+    <edge source="CVE-2015-3332" target="user@41" />
+    <edge source="guest@41" target="NONE" />
+    <edge source="guest@41" target="ADJACENT_NETWORK" />
+    <edge source="user@42" target="SINGLE" />
+    <edge source="CVE-2007-5326" target="user@42" />
+    <edge source="guest@42" target="NONE" />
+    <edge source="guest@42" target="ADJACENT_NETWORK" />
+    <edge source="user@43" target="SINGLE" />
+    <edge source="CVE-2019-15142" target="user@43" />
+    <edge source="guest@43" target="NONE" />
+    <edge source="guest@43" target="ADJACENT_NETWORK" />
+    <edge source="user@44" target="SINGLE" />
+    <edge source="CVE-2007-5328" target="root@44" />
+    <edge source="guest@44" target="NONE" />
+    <edge source="guest@44" target="ADJACENT_NETWORK" />
+    <edge source="user@45" target="SINGLE" />
+    <edge source="CVE-2019-15144" target="user@45" />
+    <edge source="guest@45" target="NONE" />
+    <edge source="guest@45" target="ADJACENT_NETWORK" />
+    <edge source="user@46" target="SINGLE" />
+    <edge source="CVE-2007-5330" target="root@46" />
+    <edge source="guest@46" target="NONE" />
+    <edge source="guest@46" target="ADJACENT_NETWORK" />
+    <edge source="user@47" target="SINGLE" />
+    <edge source="CVE-2019-18804" target="user@47" />
+    <edge source="guest@47" target="NONE" />
+    <edge source="guest@47" target="ADJACENT_NETWORK" />
+    <edge source="user@48" target="SINGLE" />
+    <edge source="CVE-2007-5332" target="root@48" />
+    <edge source="guest@48" target="NONE" />
+    <edge source="guest@48" target="ADJACENT_NETWORK" />
+    <edge source="CVE-2013-7325" target="user@49" />
+    <edge source="guest@49" target="NONE" />
+    <edge source="guest@49" target="ADJACENT_NETWORK" />
+    <edge source="user@13" target="SINGLE" />
+    <edge source="CVE-2019-1649" target="user@13" />
+    <edge source="CVE-2020-3465" target="user@13" />
+    <edge source="CVE-2019-12646" target="user@13" />
+    <edge source="CVE-2018-0163" target="user@13" />
+    <edge source="guest@13" target="NONE" />
+    <edge source="guest@13" target="LOCAL" />
+    <edge source="guest@13" target="NETWORK" />
+    <edge source="ADJACENT_NETWORK" target="CVE-2022-47208" />
+    <edge source="CVE-2022-47208" target="guest@13" />
+    <edge source="user@14" target="SINGLE" />
+    <edge source="root@14" target="LOCAL" />
+    <edge source="CVE-2009-4309" target="user@14" />
+    <edge source="guest@14" target="NONE" />
+    <edge source="guest@14" target="ADJACENT_NETWORK" />
+    <edge source="guest@14" target="LOCAL" />
+    <edge source="guest@14" target="NETWORK" />
+    <edge source="user@15" target="SINGLE" />
+    <edge source="root@15" target="LOCAL" />
+    <edge source="CVE-2019-9518" target="user@15" />
+    <edge source="guest@15" target="NONE" />
+    <edge source="guest@15" target="ADJACENT_NETWORK" />
+    <edge source="guest@15" target="LOCAL" />
+    <edge source="guest@15" target="NETWORK" />
+    <edge source="user@16" target="SINGLE" />
+    <edge source="root@16" target="LOCAL" />
+    <edge source="CVE-2010-3138" target="user@16" />
+    <edge source="guest@16" target="NONE" />
+    <edge source="guest@16" target="ADJACENT_NETWORK" />
+    <edge source="guest@16" target="LOCAL" />
+    <edge source="guest@16" target="NETWORK" />
+    <edge source="user@17" target="SINGLE" />
+    <edge source="root@17" target="LOCAL" />
+    <edge source="guest@17" target="NONE" />
+    <edge source="guest@17" target="ADJACENT_NETWORK" />
+    <edge source="guest@17" target="NETWORK" />
+    <edge source="guest@17" target="LOCAL" />
+    <edge source="CVE-2023-1786" target="guest@17" />
+    <edge source="user@18" target="SINGLE" />
+    <edge source="root@18" target="LOCAL" />
+    <edge source="CVE-2006-6134" target="user@18" />
+    <edge source="guest@18" target="NONE" />
+    <edge source="guest@18" target="ADJACENT_NETWORK" />
+    <edge source="guest@18" target="LOCAL" />
+    <edge source="guest@18" target="NETWORK" />
+    <edge source="user@19" target="SINGLE" />
+    <edge source="root@19" target="LOCAL" />
+    <edge source="NETWORK" target="CVE-2023-1523" />
+    <edge source="CVE-2023-1523" target="user@19" />
+    <edge source="guest@19" target="NONE" />
+    <edge source="guest@19" target="ADJACENT_NETWORK" />
+    <edge source="guest@19" target="LOCAL" />
+    <edge source="user@20" target="SINGLE" />
+    <edge source="root@20" target="LOCAL" />
+    <edge source="CVE-2012-4351" target="user@20" />
+    <edge source="guest@20" target="NONE" />
+    <edge source="guest@20" target="ADJACENT_NETWORK" />
+    <edge source="guest@20" target="LOCAL" />
+    <edge source="guest@20" target="NETWORK" />
+    <edge source="user@21" target="SINGLE" />
+    <edge source="root@21" target="LOCAL" />
+    <edge source="CVE-2023-5536" target="user@21" />
+    <edge source="guest@21" target="NONE" />
+    <edge source="guest@21" target="ADJACENT_NETWORK" />
+    <edge source="guest@21" target="LOCAL" />
+    <edge source="guest@21" target="NETWORK" />
+    <edge source="user@22" target="SINGLE" />
+    <edge source="root@22" target="LOCAL" />
+    <edge source="CVE-2013-1610" target="user@22" />
+    <edge source="guest@22" target="NONE" />
+    <edge source="guest@22" target="ADJACENT_NETWORK" />
+    <edge source="guest@22" target="LOCAL" />
+    <edge source="guest@22" target="NETWORK" />
+    <edge source="user@23" target="SINGLE" />
+    <edge source="root@23" target="LOCAL" />
+    <edge source="CVE-2022-3328" target="user@23" />
+    <edge source="guest@23" target="NONE" />
+    <edge source="guest@23" target="ADJACENT_NETWORK" />
+    <edge source="guest@23" target="LOCAL" />
+    <edge source="guest@23" target="NETWORK" />
+    <edge source="root@13" target="LOCAL" />
+  </graph>
+</graphml>
